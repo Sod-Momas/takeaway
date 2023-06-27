@@ -2,7 +2,6 @@ package io.github.sodmomas.takeaway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -19,59 +18,41 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author Sod-Momas
  * @since 2023/6/27
  */
-@Configuration
-@EnableGlobalAuthentication
-@EnableWebSecurity
+@Configuration(proxyBeanMethods = false)
+@EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
-//        @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.withDefaultPasswordEncoder()
-//                .username("admin")
-//                .password("password")
-//                .roles("ADMIN", "USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return (web) -> web.ignoring()
-//                // Spring Security should completely ignore URLs starting with /resources/
-//                .requestMatchers("/resources/**");
-//    }
     @Bean
     public WebSecurityCustomizer ignoringCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/ignore1", "/ignore2");
+        return (web) -> web.ignoring().requestMatchers(
+                "/favicon.ico"
+//                "/resources/**",
+//                "/static/**"
+        );
     }
 
-//        @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests()
-//                .requestMatchers("/**").hasRole("USER")
-//                .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .and()
-//                .formLogin();
-//        return http.build();
-//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authorizeHttpRequests) ->
-                        authorizeHttpRequests
-                                .requestMatchers("/**").hasRole("USER")
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                );
+//        http.authorizeHttpRequests((req) -> req
+//                // 登录与退出成功
+//                .requestMatchers("/authentication/login", "/authentication/logout").permitAll()
+//                // 其他请求需要认证
+//                .anyRequest().authenticated()
+//        );
+        http.formLogin(req -> {
+        });
+        http.logout(req -> {
+        });
         return http.build();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         // outputs {bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG
         // remember the password that is printed out and use in the next step
 //        System.out.println(encoder.encode("password"));
