@@ -1,12 +1,6 @@
 # takeaway
 外卖系统
 
-# Read Me First
-The following was discovered as part of building this project:
-
-* The JVM level was changed from '11' to '17', review the [JDK Version Range](https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions#jdk-version-range) on the wiki for more details.
-* The original package name 'io.github.sod-momas.takeaway' is invalid and this project uses 'io.github.sodmomas.takeaway' instead.
-
 # Getting Started
 
 ### Reference Documentation
@@ -42,3 +36,9 @@ In this file, the following services have been defined:
 * postgres: [`postgres:latest`](https://hub.docker.com/_/postgres)
 
 Please review the tags of the used images and set them to the same as you're running in production.
+
+### Other Tool
+
+* [MyBatis-Plus](https://mybatis.plus/)
+* [mvnrepository](https://mvnrepository.com/)
+* [在线生成透明ICO图标](http://www.ico51.cn/)

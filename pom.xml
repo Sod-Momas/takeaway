@@ -56,6 +56,8 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+        <!-- https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#features.docker-compose -->
+		<!-- 项目启动的时候启动docker环境, 项目停止的时候关闭项目环境，真是CPU消耗小能手 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-docker-compose</artifactId>
