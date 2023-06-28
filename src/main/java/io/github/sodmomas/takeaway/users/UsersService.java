@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
  * @since 2023/6/29
  */
 @Service
-public class UsersService extends ServiceImpl<UsersMapper, UserEntity> implements IService<UserEntity> {
+public class UsersService extends ServiceImpl<UsersMapper, UsersEntity> implements IService<UsersEntity> {
 }

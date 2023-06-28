@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
  * @since 2023/6/29
  */
 @TableName("users")
-public class UserEntity extends Model<UserEntity> {
+public class UsersEntity extends Model<UsersEntity> {
     @TableId
     private String username;
     @TableField

@@ -1,14 +1,16 @@
 package io.github.sodmomas.takeaway.users;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Sod-Momas
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("users")
 public class UsersController {
 
-//    @Autowired
+    //    @Autowired
 //    private UserDetailsManager userDetailsManager;
 //    @Autowired
 //    private GroupManager groupManager;
@@ -54,5 +56,11 @@ public class UsersController {
 //        model.addAttribute("users", userDetailsManager.findUsersInGroup(group));
 //        return "users/groups";
 //    }
+
+    @PostMapping("list")
+    Page<UsersEntity> list(@RequestBody UsersListQuery query) {
+        final QueryWrapper<UsersEntity> wrapper = Wrappers.<UsersEntity>query().like(StringUtils.hasText(query.getUsername()), "username", query.getUsername());
+        return usersService.page(new Page<>(query.getCurrent(), query.getSize()), wrapper);
+    }
 
 }
