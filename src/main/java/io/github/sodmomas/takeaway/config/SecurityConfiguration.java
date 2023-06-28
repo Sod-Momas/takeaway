@@ -32,12 +32,12 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests((req) -> req
-//                // 登录与退出成功
-//                .requestMatchers("/authentication/login", "/authentication/logout").permitAll()
-//                // 其他请求需要认证
-//                .anyRequest().authenticated()
-//        );
+        http.authorizeHttpRequests((req) -> req
+                // 登录与退出成功
+                .requestMatchers("/login", "/authentication/logout").permitAll()
+                // 其他请求需要认证
+                .anyRequest().authenticated()
+        );
         http.formLogin(req -> {
         });
         http.logout(req -> {
