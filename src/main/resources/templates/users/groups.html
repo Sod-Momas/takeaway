@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>用户组</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(groups)}">
+        <td>暂无数据</td>
+    </tr>
+    <tr th:unless="${#lists.isEmpty(groups)}" th:each="item : ${groups}">
+        <td>
+            <a th:href="@{/users/(item)}" th:text="${item}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <legend>用户列表</legend>
+    <thead>
+    <tr>
+        <th>用户</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(users)}">
+        <td>暂无数据</td>
+    </tr>
+    <tr th:unless="${#lists.isEmpty(users)}" th:each="item : ${users}">
+        <td th:text="${item}"></td>
+        <td>
+            查看
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
