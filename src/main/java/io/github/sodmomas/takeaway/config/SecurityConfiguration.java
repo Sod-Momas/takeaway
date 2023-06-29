@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 
 /**
@@ -30,11 +32,35 @@ public class SecurityConfiguration {
             req.loginPage("/login");
             // 登录处理接口
             req.loginProcessingUrl("/login");
+            req.successHandler(successHandler());
         });
         http.logout(req -> {
         });
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
+    }
+
+    /**
+     * @return 每个角色不一样跳到不同首页
+     * @see WebConfig#addViewControllers(ViewControllerRegistry)·
+     */
+    private AuthenticationSuccessHandler successHandler() {
+        return (request, response, authentication) -> {
+            final String usertype = request.getParameter("usertype");
+            if ("patient".equals(usertype)) {
+                response.sendRedirect("/patient");
+//                request.getRequestDispatcher("/patient").forward(request, response);
+            } else if ("doctor".equals(usertype)) {
+//                request.getRequestDispatcher("/doctor").forward(request, response);
+                response.sendRedirect("/doctor");
+            } else if ("employee".equals(usertype)) {
+//                request.getRequestDispatcher("/employee").forward(request, response);
+                response.sendRedirect("/employee");
+            } else {
+//                request.getRequestDispatcher("/index").forward(request, response);
+                response.sendRedirect("/index");
+            }
+        };
     }
 
     @Bean
