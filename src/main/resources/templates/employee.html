@@ -8,8 +8,27 @@
     <title>运营首页</title>
 </head>
 <body>
-运营首页
-<p><a href="/logout">退出登录</a></p>
-<p><a href="/">返回首页</a></p>
+<div class="container">
+    <h2>运营首页</h2>
+    <div class="btn-toolbar" role="toolbar" aria-label="跳转按钮组">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a class="btn btn-secondary" href="/">返回首页</a>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="管理列表">
+            <a class="btn btn-secondary" href="/emp/drug">药品管理</a>
+            <a class="btn btn-secondary" href="/emp/patient">患者管理</a>
+            <a class="btn btn-secondary" href="/emp/doctor">医生管理</a>
+            <a class="btn btn-secondary" href="/emp/rx">处方管理</a>
+        </div>
+        <div class="btn-group" role="group" aria-label="Third group">
+            <a class="btn btn-secondary" href="/logout">退出登录</a>
+        </div>
+    </div>
+
+    <div>
+        <!--  TODO 药品管理  患者管理  医生管理 处方管理  -->
+    </div>
+</div>
+
 </body>
 </html>
