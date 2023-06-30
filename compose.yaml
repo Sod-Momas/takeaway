@@ -39,6 +39,24 @@ services:
       PGADMIN_LISTEN_PORT: 80
     ports:
       - "54328:80"
-
+##  https://min.io/docs/minio/linux/reference/minio-server/minio-server.html#id5
+#  minio:
+#    image: minio/minio:RELEASE.2023-06-29T05-12-28Z
+#    container_name: minio
+#    restart: on-failure
+#    environment:
+#      MINIO_ROOT_USER: takeaway
+#      MINIO_ROOT_PASSWORD: takeaway
+#      MINIO_API_ROOT_ACCESS: on
+#      MINIO_ACCESS_KEY: takeaway
+#      MINIO_SECRET_KEY: takeaway
+#
+#      DIRECTORIES: "/var/minio"
+#    ports:
+#      - "9090"
+##  https://hub.docker.com/_/nginx
+#  nginx:
+#    image: nginx:stable-alpine3.17-slim
+#    container_name: nginx
 
 
