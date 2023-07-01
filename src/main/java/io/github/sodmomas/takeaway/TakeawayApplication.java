@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-@MapperScan
-@EnableTransactionManagement
+//
+//@MapperScan
+//@EnableTransactionManagement
 @SpringBootApplication
 public class TakeawayApplication {
 
@@ -17,12 +17,12 @@ public class TakeawayApplication {
         SpringApplication.run(TakeawayApplication.class, args);
     }
 
-    @Bean
-    ApplicationRunner afterStart(Environment env) {
-        return arg -> {
-            final Integer port = env.getProperty("server.port", int.class, 8080);
-            System.out.printf("手动进页面: http://localhost:%d/%n", port);
-        };
-    }
+//    @Bean
+//    ApplicationRunner afterStart(Environment env) {
+//        return arg -> {
+//            final Integer port = env.getProperty("server.port", int.class, 8080);
+//            System.out.printf("手动进页面: http://localhost:%d/%n", port);
+//        };
+//    }
 
 }
