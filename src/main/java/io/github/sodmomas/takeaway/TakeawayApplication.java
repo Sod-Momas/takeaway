@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //
 //@MapperScan
 //@EnableTransactionManagement
-@SpringBootApplication
-public class TakeawayApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(TakeawayApplication.class, args);
-    }
+//@SpringBootApplication
+//public class TakeawayApplication {
+//
+//    public static void main(String[] args) {
+//        SpringApplication.run(TakeawayApplication.class, args);
+//    }
 
 //    @Bean
 //    ApplicationRunner afterStart(Environment env) {
@@ -25,4 +25,4 @@ public class TakeawayApplication {
 //        };
 //    }
 
-}
+//}
