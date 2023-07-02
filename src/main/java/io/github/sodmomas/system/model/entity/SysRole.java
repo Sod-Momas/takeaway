@@ -5,16 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.github.sodmomas.system.common.base.BaseEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * 角色表
  */
-@EqualsAndHashCode(callSuper = true)
 @TableName(value ="sys_role")
 @Data
-@NoArgsConstructor
 public class SysRole extends BaseEntity {
     /**
      * 

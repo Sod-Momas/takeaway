@@ -2,11 +2,11 @@ package io.github.sodmomas.system.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.model.entity.SysDict;
 import io.github.sodmomas.system.model.form.DictForm;
 import io.github.sodmomas.system.model.query.DictPageQuery;
 import io.github.sodmomas.system.model.vo.DictPageVO;
+import io.github.sodmomas.system.common.model.Option;
 
 import java.util.List;
 

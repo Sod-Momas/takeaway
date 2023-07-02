@@ -2,7 +2,6 @@ package io.github.sodmomas.system.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,8 +14,8 @@ import java.util.List;
  * @since 2022/1/22
  */
 @Schema(description ="下拉选项对象")
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 public class Option<T> {
 
     public Option(T value, String label) {

@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.sodmomas.system.common.constant.SystemConstants;
 import io.github.sodmomas.system.common.enums.MenuTypeEnum;
 import io.github.sodmomas.system.common.enums.StatusEnum;
-import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.converter.MenuConverter;
 import io.github.sodmomas.system.mapper.SysMenuMapper;
 import io.github.sodmomas.system.model.bo.RouteBO;
@@ -17,6 +16,7 @@ import io.github.sodmomas.system.model.entity.SysMenu;
 import io.github.sodmomas.system.model.form.MenuForm;
 import io.github.sodmomas.system.model.query.MenuQuery;
 import io.github.sodmomas.system.model.vo.MenuVO;
+import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.model.vo.RouteVO;
 import io.github.sodmomas.system.service.SysMenuService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -80,7 +79,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         MenuTypeEnum menuType = menuForm.getType();  // 菜单类型
         switch (menuType) {
             case CATALOG -> { // 目录
-                if (NumberUtil.equals((long)menuForm.getParentId(), 0) && !path.startsWith("/")) {
+                if (NumberUtil.equals(menuForm.getParentId(), 0) && !path.startsWith("/")) {
                     menuForm.setPath("/" + path); // 一级目录需以 / 开头
                 }
                 menuForm.setComponent("Layout");
@@ -108,7 +107,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * 路由列表
      */
     @Override
-    @Cacheable(cacheNames = "io/github/sodmomas/system", key = "'routes'")
+    @Cacheable(cacheNames = "system", key = "'routes'")
     public List<RouteVO> listRoutes() {
         List<RouteBO> menuList = this.baseMapper.listRoutes();
         return recurRoutes(SystemConstants.ROOT_NODE_ID, menuList);

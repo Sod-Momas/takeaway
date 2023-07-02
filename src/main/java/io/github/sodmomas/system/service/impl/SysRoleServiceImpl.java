@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.sodmomas.system.common.constant.SystemConstants;
 import io.github.sodmomas.system.common.model.Option;
-import io.github.sodmomas.system.common.util.SecurityUtils;
 import io.github.sodmomas.system.converter.RoleConverter;
 import io.github.sodmomas.system.mapper.SysRoleMapper;
 import io.github.sodmomas.system.model.entity.SysRole;
@@ -21,6 +20,7 @@ import io.github.sodmomas.system.model.vo.RolePageVO;
 import io.github.sodmomas.system.service.SysRoleMenuService;
 import io.github.sodmomas.system.service.SysRoleService;
 import io.github.sodmomas.system.service.SysUserRoleService;
+import io.github.sodmomas.system.common.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -189,7 +189,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     @Transactional
-    @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
+    @CacheEvict(cacheNames = "system", key = "'routes'")
     public boolean updateRoleMenus(Long roleId, List<Long> menuIds) {
         // 删除角色菜单
         sysRoleMenuService.remove(new LambdaQueryWrapper<SysRoleMenu>().eq(SysRoleMenu::getRoleId, roleId));

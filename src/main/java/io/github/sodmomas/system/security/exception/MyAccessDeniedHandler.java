@@ -2,12 +2,12 @@ package io.github.sodmomas.system.security.exception;
 
 import io.github.sodmomas.system.common.result.ResultCode;
 import io.github.sodmomas.system.common.util.ResponseUtils;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**

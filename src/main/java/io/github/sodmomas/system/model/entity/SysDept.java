@@ -2,6 +2,7 @@ package io.github.sodmomas.system.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import io.github.sodmomas.system.common.base.BaseEntity;
 import lombok.Data;
 

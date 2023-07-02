@@ -8,8 +8,8 @@ package io.github.sodmomas.system.mapper;
  */
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.sodmomas.system.model.bo.RouteBO;
 import io.github.sodmomas.system.model.entity.SysMenu;
+import io.github.sodmomas.system.model.bo.RouteBO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

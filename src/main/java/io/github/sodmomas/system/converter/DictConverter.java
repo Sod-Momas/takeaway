@@ -6,7 +6,6 @@ import io.github.sodmomas.system.model.form.DictForm;
 import io.github.sodmomas.system.model.vo.DictPageVO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 /**
  * 字典数据项对象转换器
@@ -16,10 +15,6 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper(componentModel = "spring")
 public interface DictConverter {
-
-    DictConverter INSTANCE = Mappers.getMapper(DictConverter.class);
-
-    DictPageVO map(SysDict entity);
 
     Page<DictPageVO> entity2Page(Page<SysDict> page);
 

@@ -7,10 +7,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.sodmomas.system.model.entity.SysDict;
 import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.converter.DictTypeConverter;
 import io.github.sodmomas.system.mapper.SysDictTypeMapper;
-import io.github.sodmomas.system.model.entity.SysDict;
 import io.github.sodmomas.system.model.entity.SysDictType;
 import io.github.sodmomas.system.model.form.DictTypeForm;
 import io.github.sodmomas.system.model.query.DictTypePageQuery;
@@ -69,7 +69,8 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         );
 
         // 实体转换
-        return dictTypeConverter.entity2Page(dictTypePage);
+        Page<DictTypePageVO> pageResult = dictTypeConverter.entity2Page(dictTypePage);
+        return pageResult;
     }
 
     /**

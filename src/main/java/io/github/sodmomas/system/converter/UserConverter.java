@@ -2,9 +2,9 @@ package io.github.sodmomas.system.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.sodmomas.system.model.bo.UserBO;
-import io.github.sodmomas.system.model.bo.UserFormBO;
 import io.github.sodmomas.system.model.entity.SysUser;
 import io.github.sodmomas.system.model.form.UserForm;
+import io.github.sodmomas.system.model.bo.UserFormBO;
 import io.github.sodmomas.system.model.vo.UserImportVO;
 import io.github.sodmomas.system.model.vo.UserInfoVO;
 import io.github.sodmomas.system.model.vo.UserPageVO;
@@ -37,7 +37,7 @@ public interface UserConverter {
     SysUser form2Entity(UserForm entity);
 
     @Mappings({
-            @Mapping(target = "userId", source = "id"),
+            @Mapping(target = "userId", source = "id")
     })
     UserInfoVO entity2UserInfoVo(SysUser entity);
 

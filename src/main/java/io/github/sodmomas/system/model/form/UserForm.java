@@ -1,11 +1,11 @@
 package io.github.sodmomas.system.model.form;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
-
 import java.util.List;
 
 /**

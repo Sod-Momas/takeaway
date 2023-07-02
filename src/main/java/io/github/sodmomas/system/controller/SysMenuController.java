@@ -1,11 +1,11 @@
 package io.github.sodmomas.system.controller;
 
-import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.common.result.Result;
+import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
 import io.github.sodmomas.system.model.form.MenuForm;
 import io.github.sodmomas.system.model.query.MenuQuery;
 import io.github.sodmomas.system.model.vo.MenuVO;
+import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.model.vo.RouteVO;
 import io.github.sodmomas.system.service.SysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -70,7 +70,7 @@ public class SysMenuController {
     @PostMapping
     @PreAuthorize("@ss.hasPerm('sys:menu:add')")
     @PreventDuplicateSubmit
-    @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
+    @CacheEvict(cacheNames = "system", key = "'routes'")
     public Result addMenu(@RequestBody MenuForm menuForm) {
         boolean result = menuService.saveMenu(menuForm);
         return Result.judge(result);
@@ -79,7 +79,7 @@ public class SysMenuController {
     @Operation(summary = "修改菜单",security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping(value = "/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:edit')")
-    @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
+    @CacheEvict(cacheNames = "system", key = "'routes'")
     public Result updateMenu(
             @RequestBody MenuForm menuForm
     ) {
@@ -90,7 +90,7 @@ public class SysMenuController {
     @Operation(summary = "删除菜单",security = {@SecurityRequirement(name = "Authorization")})
     @DeleteMapping("/{id}")
     @PreAuthorize("@ss.hasPerm('sys:menu:delete')")
-    @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
+    @CacheEvict(cacheNames = "system", key = "'routes'")
     public Result deleteMenu(
             @Parameter(description ="菜单ID，多个以英文(,)分割") @PathVariable("id") Long id
     ) {

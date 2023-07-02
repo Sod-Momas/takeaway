@@ -2,10 +2,10 @@ package io.github.sodmomas.system.config;
 
 import io.github.sodmomas.system.common.constant.SecurityConstants;
 import io.github.sodmomas.system.filter.JwtAuthenticationFilter;
-import io.github.sodmomas.system.filter.VerifyCodeFilter;
-import io.github.sodmomas.system.security.JwtTokenManager;
 import io.github.sodmomas.system.security.exception.MyAccessDeniedHandler;
 import io.github.sodmomas.system.security.exception.MyAuthenticationEntryPoint;
+import io.github.sodmomas.system.security.JwtTokenManager;
+import io.github.sodmomas.system.filter.VerifyCodeFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

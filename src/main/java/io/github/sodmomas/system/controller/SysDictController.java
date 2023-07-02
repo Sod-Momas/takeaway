@@ -1,22 +1,22 @@
 package io.github.sodmomas.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.common.result.PageResult;
 import io.github.sodmomas.system.common.result.Result;
+import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
 import io.github.sodmomas.system.model.form.DictForm;
 import io.github.sodmomas.system.model.form.DictTypeForm;
 import io.github.sodmomas.system.model.query.DictPageQuery;
 import io.github.sodmomas.system.model.query.DictTypePageQuery;
 import io.github.sodmomas.system.model.vo.DictPageVO;
 import io.github.sodmomas.system.model.vo.DictTypePageVO;
+import io.github.sodmomas.system.common.model.Option;
 import io.github.sodmomas.system.service.SysDictService;
 import io.github.sodmomas.system.service.SysDictTypeService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;

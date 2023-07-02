@@ -5,9 +5,6 @@ import io.github.sodmomas.system.model.entity.SysDictType;
 import io.github.sodmomas.system.model.form.DictTypeForm;
 import io.github.sodmomas.system.model.vo.DictTypePageVO;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
-import java.util.List;
 
 /**
  * 字典类型对象转换器
@@ -17,14 +14,10 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring")
 public interface DictTypeConverter {
-    DictTypeConverter INSTANCE = Mappers.getMapper(DictTypeConverter.class);
-
-    DictTypePageVO map(SysDictType sysDictType);
 
     Page<DictTypePageVO> entity2Page(Page<SysDictType> page);
 
     DictTypeForm entity2Form(SysDictType entity);
 
     SysDictType form2Entity(DictTypeForm entity);
-
 }

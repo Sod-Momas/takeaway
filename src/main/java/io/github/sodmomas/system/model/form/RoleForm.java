@@ -1,8 +1,10 @@
 package io.github.sodmomas.system.model.form;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+
+// import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "角色表单对象")
 @Data

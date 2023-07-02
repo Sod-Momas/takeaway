@@ -3,7 +3,6 @@ package io.github.sodmomas.system.model.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -14,7 +13,6 @@ import java.util.Date;
  * @since 2022/1/15 9:41
  */
 @Schema(description ="用户分页对象")
-@NoArgsConstructor
 @Data
 public class UserPageVO {
 

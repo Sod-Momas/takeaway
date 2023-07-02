@@ -3,13 +3,11 @@ package io.github.sodmomas.system.model.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Schema(description ="角色分页对象")
 @Data
-@NoArgsConstructor
 public class RolePageVO {
 
     @Schema(description="角色ID")

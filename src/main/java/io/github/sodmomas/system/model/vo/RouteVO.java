@@ -20,7 +20,7 @@ public class RouteVO {
     @Schema(description = "路由路径", example = "user")
     private String path;
 
-    @Schema(description = "组件路径", example = "io/github/sodmomas/system/user/index")
+    @Schema(description = "组件路径", example = "system/user/index")
     private String component;
 
     @Schema(description = "跳转链接", example = "https://www.youlai.tech")
