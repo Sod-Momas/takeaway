@@ -1,12 +1,19 @@
 package io.github.sodmomas.takeaway.service;
 
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.sodmomas.takeaway.mapper.SysUserRoleMapper;
 import io.github.sodmomas.takeaway.model.entity.SysUserRole;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface SysUserRoleService extends IService<SysUserRole> {
+@Service
+public class SysUserRoleService extends ServiceImpl<SysUserRoleMapper, SysUserRole> implements IService<SysUserRole> {
 
     /**
      * 保存用户角色
@@ -15,5 +22,49 @@ public interface SysUserRoleService extends IService<SysUserRole> {
      * @param roleIds
      * @return
      */
-     boolean saveUserRoles(Long userId, List<Long> roleIds);
+    public boolean saveUserRoles(Long userId, List<Long> roleIds) {
+
+        if (userId == null || CollectionUtil.isEmpty(roleIds)) {
+            return false;
+        }
+
+        // 用户原角色ID集合
+        List<Long> userRoleIds = this.list(new LambdaQueryWrapper<SysUserRole>()
+                        .eq(SysUserRole::getUserId, userId))
+                .stream()
+                .map(item -> item.getRoleId())
+                .collect(Collectors.toList());
+
+        // 新增用户角色
+        List<Long> saveRoleIds;
+        if (CollectionUtil.isEmpty(userRoleIds)) {
+            saveRoleIds = roleIds;
+        } else {
+            saveRoleIds = roleIds.stream()
+                    .filter(roleId -> !userRoleIds.contains(roleId))
+                    .collect(Collectors.toList());
+        }
+
+        List<SysUserRole> saveUserRoles = saveRoleIds
+                .stream()
+                .map(roleId -> new SysUserRole(userId, roleId))
+                .collect(Collectors.toList());
+        this.saveBatch(saveUserRoles);
+
+        // 删除用户角色
+        if (CollectionUtil.isNotEmpty(userRoleIds)) {
+            List<Long> removeRoleIds = userRoleIds.stream()
+                    .filter(roleId -> !roleIds.contains(roleId))
+                    .collect(Collectors.toList());
+
+            if (CollectionUtil.isNotEmpty(removeRoleIds)) {
+                this.remove(new LambdaQueryWrapper<SysUserRole>()
+                        .eq(SysUserRole::getUserId, userId)
+                        .in(SysUserRole::getRoleId, removeRoleIds)
+                );
+            }
+        }
+        return true;
+
+    }
 }

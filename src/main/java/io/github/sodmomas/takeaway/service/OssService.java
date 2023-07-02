@@ -1,6 +1,7 @@
 package io.github.sodmomas.takeaway.service;
 
 import io.github.sodmomas.takeaway.model.dto.FileInfo;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -9,14 +10,18 @@ import org.springframework.web.multipart.MultipartFile;
  * @author haoxr
  * @since 2022/11/19
  */
-public interface OssService {
+@Service
+public class OssService {
 
     /**
      * 上传文件
+     *
      * @param file 表单文件对象
      * @return 文件信息
      */
-    FileInfo uploadFile(MultipartFile file);
+    public FileInfo uploadFile(MultipartFile file) {
+        return new FileInfo();
+    }
 
     /**
      * 删除文件
@@ -24,7 +29,9 @@ public interface OssService {
      * @param filePath 文件完整URL
      * @return 删除结果
      */
-    boolean deleteFile(String filePath);
+    public boolean deleteFile(String filePath) {
+        return false;
+    }
 
 
 }
