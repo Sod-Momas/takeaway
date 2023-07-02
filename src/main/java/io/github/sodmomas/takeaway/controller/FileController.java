@@ -1,7 +1,7 @@
 package io.github.sodmomas.takeaway.controller;
 
 import io.github.sodmomas.takeaway.common.result.Result;
-import io.github.sodmomas.takeaway.service.OssService;
+import io.github.sodmomas.takeaway.service.MinioOssService;
 import io.github.sodmomas.takeaway.model.dto.FileInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,14 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 public class FileController {
 
-    private final OssService ossService;
+    private final MinioOssService minioOssService;
 
     @PostMapping
     @Operation(summary = "文件上传", security = {@SecurityRequirement(name = "Authorization")})
     public Result<FileInfo> uploadFile(
             @Parameter(description ="表单文件对象") @RequestParam(value = "file") MultipartFile file
     ) {
-        FileInfo fileInfo = ossService.uploadFile(file);
+        FileInfo fileInfo = minioOssService.uploadFile(file);
         return Result.success(fileInfo);
     }
 
@@ -35,7 +35,7 @@ public class FileController {
     public Result deleteFile(
             @Parameter(description ="文件路径") @RequestParam String filePath
     ) {
-        boolean result = ossService.deleteFile(filePath);
+        boolean result = minioOssService.deleteFile(filePath);
         return Result.judge(result);
     }
 }
