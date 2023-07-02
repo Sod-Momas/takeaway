@@ -1,7 +1,6 @@
 package io.github.sodmomas.takeaway.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.sodmomas.system.model.entity.SysRoleMenu;
 import io.github.sodmomas.takeaway.model.entity.SysRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 

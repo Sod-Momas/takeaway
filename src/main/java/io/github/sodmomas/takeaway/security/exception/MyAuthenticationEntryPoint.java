@@ -1,7 +1,6 @@
 package io.github.sodmomas.takeaway.security.exception;
 
-import io.github.sodmomas.system.common.result.ResultCode;
-import io.github.sodmomas.system.common.util.ResponseUtils;
+import io.github.sodmomas.takeaway.common.result.ResultCode;
 import io.github.sodmomas.takeaway.common.util.ResponseUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,7 +1,5 @@
 package io.github.sodmomas.takeaway.security.userdetails;
 
-import io.github.sodmomas.system.model.dto.UserAuthInfo;
-import io.github.sodmomas.system.service.SysUserService;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
 import io.github.sodmomas.takeaway.service.SysUserService;
 import lombok.RequiredArgsConstructor;

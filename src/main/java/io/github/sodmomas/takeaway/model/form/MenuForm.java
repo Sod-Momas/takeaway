@@ -1,6 +1,5 @@
 package io.github.sodmomas.takeaway.model.form;
 
-import io.github.sodmomas.system.common.enums.MenuTypeEnum;
 import io.github.sodmomas.takeaway.common.enums.MenuTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

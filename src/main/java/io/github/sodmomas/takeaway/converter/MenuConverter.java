@@ -1,8 +1,5 @@
 package io.github.sodmomas.takeaway.converter;
 
-import io.github.sodmomas.system.model.entity.SysMenu;
-import io.github.sodmomas.system.model.form.MenuForm;
-import io.github.sodmomas.system.model.vo.MenuVO;
 import io.github.sodmomas.takeaway.model.entity.SysMenu;
 import io.github.sodmomas.takeaway.model.form.MenuForm;
 import io.github.sodmomas.takeaway.model.vo.MenuVO;

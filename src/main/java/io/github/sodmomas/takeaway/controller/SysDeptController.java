@@ -1,12 +1,9 @@
 package io.github.sodmomas.takeaway.controller;
 
-import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.system.common.model.Option;
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.model.form.DeptForm;
-import io.github.sodmomas.system.model.query.DeptQuery;
-import io.github.sodmomas.system.model.vo.DeptVO;
-import io.github.sodmomas.system.service.SysDeptService;
+import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
+import io.github.sodmomas.takeaway.common.result.Result;
+import io.github.sodmomas.takeaway.model.vo.DeptVO;
+import io.github.sodmomas.takeaway.service.SysDeptService;
 import io.github.sodmomas.takeaway.common.model.Option;
 import io.github.sodmomas.takeaway.model.form.DeptForm;
 import io.github.sodmomas.takeaway.model.query.DeptQuery;

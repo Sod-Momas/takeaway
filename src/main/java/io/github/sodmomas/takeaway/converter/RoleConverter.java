@@ -1,10 +1,6 @@
 package io.github.sodmomas.takeaway.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.common.model.Option;
-import io.github.sodmomas.system.model.entity.SysRole;
-import io.github.sodmomas.system.model.form.RoleForm;
-import io.github.sodmomas.system.model.vo.RolePageVO;
 import io.github.sodmomas.takeaway.common.model.Option;
 import io.github.sodmomas.takeaway.model.entity.SysRole;
 import io.github.sodmomas.takeaway.model.form.RoleForm;
@@ -12,7 +8,6 @@ import io.github.sodmomas.takeaway.model.vo.RolePageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 

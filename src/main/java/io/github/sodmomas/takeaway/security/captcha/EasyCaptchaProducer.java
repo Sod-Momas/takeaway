@@ -2,7 +2,6 @@ package io.github.sodmomas.takeaway.security.captcha;
 
 import com.wf.captcha.*;
 import com.wf.captcha.base.Captcha;
-import io.github.sodmomas.takeaway.common.enums.CaptchaTypeEnum;
 import io.github.sodmomas.takeaway.config.CaptchaConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,24 +28,24 @@ public class EasyCaptchaProducer {
         String fontName = captchaConfig.getFontName();
 
         switch (captchaConfig.getType()) {
-            case CaptchaTypeEnum.ARITHMETIC:
+            case ARITHMETIC:
                 captcha = new ArithmeticCaptcha(width, height);
                 //固定设置为两位，图片为算数运算表达式
                 captcha.setLen(2);
                 break;
-            case CaptchaTypeEnum.CHINESE:
+            case CHINESE:
                 captcha = new ChineseCaptcha(width, height);
                 captcha.setLen(length);
                 break;
-            case CaptchaTypeEnum.CHINESE_GIF:
+            case CHINESE_GIF:
                 captcha = new ChineseGifCaptcha(width, height);
                 captcha.setLen(length);
                 break;
-            case CaptchaTypeEnum.GIF:
+            case GIF:
                 captcha = new GifCaptcha(width, height);//最后一位是位数
                 captcha.setLen(length);
                 break;
-            case CaptchaTypeEnum.SPEC:
+            case SPEC:
                 captcha = new SpecCaptcha(width, height);
                 captcha.setLen(length);
                 break;

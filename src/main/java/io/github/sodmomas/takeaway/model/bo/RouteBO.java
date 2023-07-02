@@ -2,7 +2,6 @@ package io.github.sodmomas.takeaway.model.bo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.github.sodmomas.system.common.enums.MenuTypeEnum;
 import io.github.sodmomas.takeaway.common.enums.MenuTypeEnum;
 import lombok.Data;
 

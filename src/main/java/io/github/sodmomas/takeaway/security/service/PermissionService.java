@@ -2,8 +2,7 @@ package io.github.sodmomas.takeaway.security.service;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import io.github.sodmomas.system.common.constant.SecurityConstants;
-import io.github.sodmomas.system.common.util.SecurityUtils;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
 import io.github.sodmomas.takeaway.common.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

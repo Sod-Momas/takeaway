@@ -1,6 +1,5 @@
 package io.github.sodmomas.takeaway.service;
 
-import io.github.sodmomas.system.model.dto.FileInfo;
 import io.github.sodmomas.takeaway.model.dto.FileInfo;
 import org.springframework.web.multipart.MultipartFile;
 

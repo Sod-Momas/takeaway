@@ -2,9 +2,12 @@ package io.github.sodmomas.takeaway.security;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;
-import io.github.sodmomas.system.common.constant.SecurityConstants;
-import io.github.sodmomas.system.security.userdetails.SysUserDetails;
-import io.jsonwebtoken.*;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.security.userdetails.SysUserDetails;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;

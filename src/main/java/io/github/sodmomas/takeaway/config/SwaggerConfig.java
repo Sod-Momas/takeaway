@@ -1,6 +1,7 @@
 package io.github.sodmomas.takeaway.config;
 
-import io.swagger.v3.oas.models.*;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme;
@@ -46,7 +47,7 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi systemApi() {
         String[] paths = {"/**"};
-        String[] packagesToScan = {"io.github.sodmomas.system.controller"};
+        String[] packagesToScan = {"io.github.sodmomas.takeaway.controller"};
         return GroupedOpenApi.builder()
                 .group("系统接口")
                 .packagesToScan(packagesToScan)

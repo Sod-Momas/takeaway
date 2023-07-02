@@ -1,11 +1,8 @@
 package io.github.sodmomas.takeaway.filter;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.sodmomas.system.common.constant.SecurityConstants;
-import io.github.sodmomas.system.common.result.ResultCode;
-import io.github.sodmomas.system.common.util.RequestUtils;
-import io.github.sodmomas.system.common.util.ResponseUtils;
-import io.github.sodmomas.system.security.JwtTokenManager;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.common.result.ResultCode;
 import io.github.sodmomas.takeaway.common.util.RequestUtils;
 import io.github.sodmomas.takeaway.common.util.ResponseUtils;
 import io.github.sodmomas.takeaway.security.JwtTokenManager;

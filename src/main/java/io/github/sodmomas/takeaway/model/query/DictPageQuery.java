@@ -1,7 +1,6 @@
 package io.github.sodmomas.takeaway.model.query;
 
 
-import io.github.sodmomas.system.common.base.BasePageQuery;
 import io.github.sodmomas.takeaway.common.base.BasePageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

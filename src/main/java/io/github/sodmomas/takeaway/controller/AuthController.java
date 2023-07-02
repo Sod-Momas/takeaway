@@ -1,16 +1,13 @@
 package io.github.sodmomas.takeaway.controller;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.sodmomas.system.common.constant.SecurityConstants;
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.common.util.RequestUtils;
-import io.github.sodmomas.system.model.dto.CaptchaResult;
-import io.github.sodmomas.system.model.dto.LoginResult;
-import io.github.sodmomas.system.security.JwtTokenManager;
-import io.github.sodmomas.system.security.captcha.EasyCaptchaService;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.common.util.RequestUtils;
 import io.github.sodmomas.takeaway.model.dto.CaptchaResult;
 import io.github.sodmomas.takeaway.model.dto.LoginResult;
+import io.github.sodmomas.takeaway.security.JwtTokenManager;
+import io.github.sodmomas.takeaway.security.captcha.EasyCaptchaService;
 import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

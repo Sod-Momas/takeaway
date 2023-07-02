@@ -1,8 +1,8 @@
 package io.github.sodmomas.takeaway.common.util;
 
 import cn.hutool.json.JSONUtil;
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.common.result.ResultCode;
+import io.github.sodmomas.takeaway.common.result.Result;
+import io.github.sodmomas.takeaway.common.result.ResultCode;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

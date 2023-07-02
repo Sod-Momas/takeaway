@@ -1,11 +1,11 @@
 package io.github.sodmomas.takeaway.config;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.system.common.exception.BusinessException;
-import io.github.sodmomas.system.common.result.ResultCode;
-import io.github.sodmomas.system.common.util.RequestUtils;
-import io.github.sodmomas.system.security.JwtTokenManager;
+import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
+import io.github.sodmomas.takeaway.common.exception.BusinessException;
+import io.github.sodmomas.takeaway.common.result.ResultCode;
+import io.github.sodmomas.takeaway.common.util.RequestUtils;
+import io.github.sodmomas.takeaway.security.JwtTokenManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,11 +1,6 @@
 package io.github.sodmomas.takeaway.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.github.sodmomas.system.common.model.Option;
-import io.github.sodmomas.system.model.entity.SysDept;
-import io.github.sodmomas.system.model.form.DeptForm;
-import io.github.sodmomas.system.model.query.DeptQuery;
-import io.github.sodmomas.system.model.vo.DeptVO;
 import io.github.sodmomas.takeaway.common.model.Option;
 import io.github.sodmomas.takeaway.model.entity.SysDept;
 import io.github.sodmomas.takeaway.model.form.DeptForm;

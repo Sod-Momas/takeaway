@@ -1,18 +1,12 @@
 package io.github.sodmomas.takeaway.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.system.common.model.Option;
-import io.github.sodmomas.system.common.result.PageResult;
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.model.form.DictForm;
-import io.github.sodmomas.system.model.form.DictTypeForm;
-import io.github.sodmomas.system.model.query.DictPageQuery;
-import io.github.sodmomas.system.model.query.DictTypePageQuery;
-import io.github.sodmomas.system.model.vo.DictPageVO;
-import io.github.sodmomas.system.model.vo.DictTypePageVO;
-import io.github.sodmomas.system.service.SysDictService;
-import io.github.sodmomas.system.service.SysDictTypeService;
+import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
+import io.github.sodmomas.takeaway.common.result.Result;
+import io.github.sodmomas.takeaway.model.vo.DictPageVO;
+import io.github.sodmomas.takeaway.model.vo.DictTypePageVO;
+import io.github.sodmomas.takeaway.service.SysDictService;
+import io.github.sodmomas.takeaway.service.SysDictTypeService;
 import io.github.sodmomas.takeaway.common.model.Option;
 import io.github.sodmomas.takeaway.common.result.PageResult;
 import io.github.sodmomas.takeaway.model.form.DictForm;

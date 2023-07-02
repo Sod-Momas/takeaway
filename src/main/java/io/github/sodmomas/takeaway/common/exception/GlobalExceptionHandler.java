@@ -2,8 +2,8 @@ package io.github.sodmomas.takeaway.common.exception;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.common.result.ResultCode;
+import io.github.sodmomas.takeaway.common.result.Result;
+import io.github.sodmomas.takeaway.common.result.ResultCode;
 import jakarta.servlet.ServletException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;

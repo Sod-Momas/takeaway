@@ -1,6 +1,5 @@
 package io.github.sodmomas.takeaway.common.exception;
 
-import io.github.sodmomas.system.common.result.IResultCode;
 import io.github.sodmomas.takeaway.common.result.IResultCode;
 import lombok.Getter;
 

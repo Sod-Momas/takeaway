@@ -2,7 +2,6 @@ package io.github.sodmomas.takeaway.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.github.sodmomas.system.model.entity.SysUserRole;
 import io.github.sodmomas.takeaway.model.entity.SysUserRole;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package io.github.sodmomas.takeaway.common.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
-import io.github.sodmomas.system.common.base.IBaseEnum;
 import io.github.sodmomas.takeaway.common.base.IBaseEnum;
 import lombok.Getter;
 

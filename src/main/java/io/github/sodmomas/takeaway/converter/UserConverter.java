@@ -1,13 +1,8 @@
 package io.github.sodmomas.takeaway.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.model.bo.UserBO;
-import io.github.sodmomas.system.model.bo.UserFormBO;
-import io.github.sodmomas.system.model.entity.SysUser;
-import io.github.sodmomas.system.model.form.UserForm;
-import io.github.sodmomas.system.model.vo.UserImportVO;
-import io.github.sodmomas.system.model.vo.UserInfoVO;
-import io.github.sodmomas.system.model.vo.UserPageVO;
+import io.github.sodmomas.takeaway.model.bo.UserBO;
+import io.github.sodmomas.takeaway.model.bo.UserFormBO;
 import io.github.sodmomas.takeaway.model.entity.SysUser;
 import io.github.sodmomas.takeaway.model.form.UserForm;
 import io.github.sodmomas.takeaway.model.vo.UserImportVO;
@@ -28,7 +23,7 @@ import org.mapstruct.Mappings;
 public interface UserConverter {
 
     @Mappings({
-            @Mapping(target = "genderLabel", expression = "java(io.github.sodmomas.takeaway.common.base.IBaseEnum.getLabelByValue(bo.getGender(), io.github.sodmomas.system.common.enums.GenderEnum.class))")
+            @Mapping(target = "genderLabel", expression = "java(io.github.sodmomas.takeaway.common.base.IBaseEnum.getLabelByValue(bo.getGender(), io.github.sodmomas.takeaway.common.enums.GenderEnum.class))")
     })
     UserPageVO bo2Vo(UserBO bo);
 

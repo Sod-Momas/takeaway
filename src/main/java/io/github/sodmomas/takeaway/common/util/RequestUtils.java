@@ -1,7 +1,7 @@
 package io.github.sodmomas.takeaway.common.util;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.sodmomas.system.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**

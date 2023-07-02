@@ -1,12 +1,11 @@
 package io.github.sodmomas.takeaway.config;
 
-import io.github.sodmomas.system.common.constant.SecurityConstants;
-import io.github.sodmomas.system.filter.JwtAuthenticationFilter;
-import io.github.sodmomas.system.filter.VerifyCodeFilter;
-import io.github.sodmomas.system.security.JwtTokenManager;
-import io.github.sodmomas.system.security.exception.MyAccessDeniedHandler;
-import io.github.sodmomas.system.security.exception.MyAuthenticationEntryPoint;
-import org.springframework.context.annotation.AdviceMode;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.filter.JwtAuthenticationFilter;
+import io.github.sodmomas.takeaway.filter.VerifyCodeFilter;
+import io.github.sodmomas.takeaway.security.JwtTokenManager;
+import io.github.sodmomas.takeaway.security.exception.MyAccessDeniedHandler;
+import io.github.sodmomas.takeaway.security.exception.MyAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity(debug = true)
-@EnableMethodSecurity(mode = AdviceMode.ASPECTJ)
+@EnableMethodSecurity
 public class SecurityConfiguration {
     @Bean
     public WebSecurityCustomizer ignoringCustomizer() {

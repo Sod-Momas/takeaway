@@ -2,7 +2,6 @@ package io.github.sodmomas.takeaway.security.userdetails;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.sodmomas.system.model.dto.UserAuthInfo;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

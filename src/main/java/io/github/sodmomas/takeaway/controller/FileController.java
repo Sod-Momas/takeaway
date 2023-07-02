@@ -1,8 +1,7 @@
 package io.github.sodmomas.takeaway.controller;
 
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.model.dto.FileInfo;
-import io.github.sodmomas.system.service.OssService;
+import io.github.sodmomas.takeaway.common.result.Result;
+import io.github.sodmomas.takeaway.service.OssService;
 import io.github.sodmomas.takeaway.model.dto.FileInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

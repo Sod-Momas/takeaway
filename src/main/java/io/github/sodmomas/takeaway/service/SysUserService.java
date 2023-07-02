@@ -3,13 +3,6 @@ package io.github.sodmomas.takeaway.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import io.github.sodmomas.system.model.dto.UserAuthInfo;
-import io.github.sodmomas.system.model.entity.SysUser;
-import io.github.sodmomas.system.model.form.UserForm;
-import io.github.sodmomas.system.model.query.UserPageQuery;
-import io.github.sodmomas.system.model.vo.UserExportVO;
-import io.github.sodmomas.system.model.vo.UserInfoVO;
-import io.github.sodmomas.system.model.vo.UserPageVO;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
 import io.github.sodmomas.takeaway.model.entity.SysUser;
 import io.github.sodmomas.takeaway.model.form.UserForm;

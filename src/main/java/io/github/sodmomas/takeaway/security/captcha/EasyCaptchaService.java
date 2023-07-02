@@ -2,9 +2,8 @@ package io.github.sodmomas.takeaway.security.captcha;
 
 import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.base.Captcha;
-import io.github.sodmomas.system.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
 import io.github.sodmomas.takeaway.config.CaptchaConfig;
-import io.github.sodmomas.system.model.dto.CaptchaResult;
 import io.github.sodmomas.takeaway.model.dto.CaptchaResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

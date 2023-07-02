@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment;
 //
 @MapperScan
 @SpringBootApplication
-@ComponentScan("io.github.sodmomas.system")
+@ComponentScan("io.github.sodmomas.takeaway")
 public class TakeawayApplication {
 
     public static void main(String[] args) {

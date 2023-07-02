@@ -1,6 +1,6 @@
 package io.github.sodmomas.takeaway.config;
 
-import io.github.sodmomas.system.common.enums.CaptchaTypeEnum;
+import io.github.sodmomas.takeaway.common.enums.CaptchaTypeEnum;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

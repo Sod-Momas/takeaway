@@ -1,9 +1,6 @@
 package io.github.sodmomas.takeaway.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.sodmomas.system.mapper.SysRoleMenuMapper;
-import io.github.sodmomas.system.model.entity.SysRoleMenu;
-import io.github.sodmomas.system.service.SysRoleMenuService;
 import io.github.sodmomas.takeaway.mapper.SysRoleMenuMapper;
 import io.github.sodmomas.takeaway.model.entity.SysRoleMenu;
 import io.github.sodmomas.takeaway.service.SysRoleMenuService;

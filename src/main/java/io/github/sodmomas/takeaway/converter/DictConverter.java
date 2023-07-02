@@ -1,9 +1,6 @@
 package io.github.sodmomas.takeaway.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.model.entity.SysDict;
-import io.github.sodmomas.system.model.form.DictForm;
-import io.github.sodmomas.system.model.vo.DictPageVO;
 import io.github.sodmomas.takeaway.model.entity.SysDict;
 import io.github.sodmomas.takeaway.model.form.DictForm;
 import io.github.sodmomas.takeaway.model.vo.DictPageVO;

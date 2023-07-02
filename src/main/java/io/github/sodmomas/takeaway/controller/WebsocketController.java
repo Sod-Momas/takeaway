@@ -1,7 +1,7 @@
 package io.github.sodmomas.takeaway.controller;
 
 import cn.hutool.json.JSONUtil;
-import io.github.sodmomas.system.common.result.Result;
+import io.github.sodmomas.takeaway.common.result.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

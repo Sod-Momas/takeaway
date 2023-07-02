@@ -1,14 +1,9 @@
 package io.github.sodmomas.takeaway.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.system.common.model.Option;
-import io.github.sodmomas.system.common.result.PageResult;
-import io.github.sodmomas.system.common.result.Result;
-import io.github.sodmomas.system.model.form.RoleForm;
-import io.github.sodmomas.system.model.query.RolePageQuery;
-import io.github.sodmomas.system.model.vo.RolePageVO;
-import io.github.sodmomas.system.service.SysRoleService;
+import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
+import io.github.sodmomas.takeaway.common.result.Result;
+import io.github.sodmomas.takeaway.service.SysRoleService;
 import io.github.sodmomas.takeaway.common.model.Option;
 import io.github.sodmomas.takeaway.common.result.PageResult;
 import io.github.sodmomas.takeaway.model.form.RoleForm;

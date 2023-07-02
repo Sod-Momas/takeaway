@@ -2,13 +2,7 @@ package io.github.sodmomas.takeaway.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.system.common.annotation.DataPermission;
-import io.github.sodmomas.system.model.bo.UserBO;
-import io.github.sodmomas.system.model.bo.UserFormBO;
-import io.github.sodmomas.system.model.dto.UserAuthInfo;
-import io.github.sodmomas.system.model.entity.SysUser;
-import io.github.sodmomas.system.model.query.UserPageQuery;
-import io.github.sodmomas.system.model.vo.UserExportVO;
+import io.github.sodmomas.takeaway.common.annotation.DataPermission;
 import io.github.sodmomas.takeaway.model.bo.UserBO;
 import io.github.sodmomas.takeaway.model.bo.UserFormBO;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
