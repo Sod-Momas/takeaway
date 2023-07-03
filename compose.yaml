@@ -39,24 +39,34 @@ services:
       PGADMIN_LISTEN_PORT: 80
     ports:
       - "54328:80"
-##  https://min.io/docs/minio/linux/reference/minio-server/minio-server.html#id5
-#  minio:
-#    image: minio/minio:RELEASE.2023-06-29T05-12-28Z
-#    container_name: minio
-#    restart: on-failure
-#    environment:
-#      MINIO_ROOT_USER: takeaway
-#      MINIO_ROOT_PASSWORD: takeaway
-#      MINIO_API_ROOT_ACCESS: on
-#      MINIO_ACCESS_KEY: takeaway
-#      MINIO_SECRET_KEY: takeaway
-#
-#      DIRECTORIES: "/var/minio"
-#    ports:
-#      - "9090"
+#  https://min.io/docs/minio/linux/reference/minio-server/minio-server.html#id5
+  minio:
+    image: minio/minio:RELEASE.2023-06-29T05-12-28Z
+    container_name: minio
+    restart: on-failure
+    command: server /data --console-address ":9001"
+#    volumes:
+#      - /var/data:/data # 持久化地址
+    environment:
+      MINIO_ROOT_USER: takeaway
+      MINIO_ROOT_PASSWORD: takeaway
+    ports:
+      - "9001:9001"
+      - "9000:9000"
 ##  https://hub.docker.com/_/nginx
 #  nginx:
 #    image: nginx:stable-alpine3.17-slim
 #    container_name: nginx
 
+  redis:
+    image: redis:7.0-alpine # 镜像
+    container_name: redis # 容器名为'redis'
+    restart: unless-stopped # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
+#    command: redis-server /etc/redis/redis.conf --requirepass 123456 --appendonly no # 启动redis服务并添加密码为：123456,默认不开启redis-aof方式持久化配置
+#    command: redis-server --requirepass 123456 --appendonly yes # 启动redis服务并添加密码为：123456,并开启redis持久化配置
+#    volumes: # 数据卷挂载路径设置,将本机目录映射到容器目录
+#      - "/var/redis:/data"
+#      - "D://DockerFiled//Redis//redis.conf:/etc/redis/redis.conf"  # `redis.conf`文件内容`http://download.redis.io/redis-stable/redis.conf`
+    ports: # 映射端口
+      - "6379:6379"
 
