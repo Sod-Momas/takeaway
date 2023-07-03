@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @SpringBootTest
-class TakeawayApplicationTests {
+    class TakeawayApplicationTests {
     @Autowired
     private DrugMapper drugMapper;
 
