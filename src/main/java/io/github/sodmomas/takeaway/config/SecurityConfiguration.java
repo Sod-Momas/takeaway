@@ -9,6 +9,7 @@ import io.github.sodmomas.takeaway.security.exception.MyAuthenticationEntryPoint
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -46,28 +48,13 @@ public class SecurityConfiguration {
         );
     }
 
-    /*
-
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http.formLogin(req -> {
-                // 登录页面
-                req.loginPage("/login");
-                // 登录处理接口
-                req.loginProcessingUrl("/login");
-                req.successHandler(successHandler());
-            });
-            http.logout(req -> {
-            });
-            http.csrf(AbstractHttpConfigurer::disable);
-            return http.build();
-        }
-    */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    MyAuthenticationEntryPoint authenticationEntryPoint,
                                                    MyAccessDeniedHandler accessDeniedHandler,
-                                                   JwtTokenManager jwtTokenManager
+                                                   JwtTokenManager jwtTokenManager,
+                                                   UserDetailsService userDetailsService,
+                                                   AuthenticationProvider authenticationProvider
     ) throws Exception {
         http.authorizeHttpRequests(req -> req
                 .requestMatchers(SecurityConstants.LOGIN_PATH).permitAll()
@@ -79,6 +66,10 @@ public class SecurityConfiguration {
                 .accessDeniedHandler(accessDeniedHandler)
         );
         http.csrf(AbstractHttpConfigurer::disable);
+        // 配置自定义的用户详情服务和身份验证提供者
+        http.userDetailsService(userDetailsService);
+        http.authenticationProvider(authenticationProvider);
+
         // 验证码校验过滤器
         http.addFilterBefore(new VerifyCodeFilter(), UsernamePasswordAuthenticationFilter.class);
         // JWT 校验过滤器
@@ -86,29 +77,6 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-
-//    /**
-//     * @return 每个角色不一样跳到不同首页
-//     * @see WebConfig#addViewControllers(ViewControllerRegistry)·
-//     */
-//    private AuthenticationSuccessHandler successHandler() {
-//        return (request, response, authentication) -> {
-//            final String usertype = request.getParameter("usertype");
-//            if ("patient".equals(usertype)) {
-//                response.sendRedirect("/patient");
-////                request.getRequestDispatcher("/patient").forward(request, response);
-//            } else if ("doctor".equals(usertype)) {
-////                request.getRequestDispatcher("/doctor").forward(request, response);
-//                response.sendRedirect("/doctor");
-//            } else if ("employee".equals(usertype)) {
-////                request.getRequestDispatcher("/employee").forward(request, response);
-//                response.sendRedirect("/employee");
-//            } else {
-////                request.getRequestDispatcher("/index").forward(request, response);
-//                response.sendRedirect("/index");
-//            }
-//        };
-//    }
 
     @Bean
     PasswordEncoder passwordEncoder() {
