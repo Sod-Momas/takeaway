@@ -18,7 +18,6 @@ services:
   # https://registry.hub.docker.com/_/postgres
   postgres:
     image: postgres:15
-    container_name: postgres15
     restart: always
     environment:
       POSTGRES_USER: takeaway
@@ -30,7 +29,6 @@ services:
   # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
   pgadmin4:
     image: dpage/pgadmin4:7.3
-    container_name: pgadmin4
     depends_on:
       - postgres
     environment:
@@ -42,7 +40,6 @@ services:
 #  https://min.io/docs/minio/linux/reference/minio-server/minio-server.html#id5
   minio:
     image: minio/minio:RELEASE.2023-06-29T05-12-28Z
-    container_name: minio
     restart: on-failure
     command: server /data --console-address ":9001"
 #    volumes:
@@ -56,11 +53,9 @@ services:
 ##  https://hub.docker.com/_/nginx
 #  nginx:
 #    image: nginx:stable-alpine3.17-slim
-#    container_name: nginx
 
   redis:
     image: redis:7.0-alpine # 镜像
-    container_name: redis # 容器名为'redis'
     restart: unless-stopped # 指定容器退出后的重启策略为始终重启，但是不考虑在Docker守护进程启动时就已经停止了的容器
     command: redis-server --requirepass 123456
 #    command: redis-server /etc/redis/redis.conf --requirepass 123456 --appendonly no # 启动redis服务并添加密码为：123456,默认不开启redis-aof方式持久化配置
