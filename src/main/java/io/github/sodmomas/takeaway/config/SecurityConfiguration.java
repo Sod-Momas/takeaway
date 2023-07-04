@@ -7,9 +7,11 @@ import io.github.sodmomas.takeaway.security.JwtTokenManager;
 import io.github.sodmomas.takeaway.security.exception.MyAccessDeniedHandler;
 import io.github.sodmomas.takeaway.security.exception.MyAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -51,9 +53,7 @@ public class SecurityConfiguration {
                                 .authenticationEntryPoint(authenticationEntryPoint)
                                 .accessDeniedHandler(accessDeniedHandler)
                 )
-                .csrf(AbstractHttpConfigurer::disable)
-
-        ;
+                .csrf(AbstractHttpConfigurer::disable);
 
         // 验证码校验过滤器
 //        http.addFilterBefore(new VerifyCodeFilter(),UsernamePasswordAuthenticationFilter.class);
@@ -96,8 +96,8 @@ public class SecurityConfiguration {
      * @return
      * @throws Exception
      */
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    public AuthenticationManager authenticationManager(@NotNull AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 

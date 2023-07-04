@@ -42,3 +42,8 @@ Please review the tags of the used images and set them to the same as you're run
 * [MyBatis-Plus](https://mybatis.plus/)
 * [mvnrepository](https://mvnrepository.com/)
 * [在线生成透明ICO图标](http://www.ico51.cn/)
+
+http://localhost:8989/doc.html#/home
+
+
+http://localhost:8989/swagger-ui/index.html
