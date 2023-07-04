@@ -47,7 +47,11 @@ public class AuthController {
                 username.toLowerCase().trim(),
                 password
         );
+        // 执行身份验证过程
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+        // 如果认证成功，则更新 SecurityContext，即将用户信息与当前线程相关联
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         // 生成token
         String accessToken = jwtTokenManager.createToken(authentication);
         LoginResult loginResult = LoginResult.builder()
