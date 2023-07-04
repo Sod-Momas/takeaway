@@ -6,6 +6,9 @@ import io.github.sodmomas.takeaway.drug.DrugMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.sql.*;
 import java.util.Calendar;
@@ -65,5 +68,18 @@ import java.util.List;
         final List<DrugEntity> drugs = drugMapper.selectList(Wrappers.emptyWrapper());
         System.out.println(drugs);
     }
-
+    @Test
+    void redisTest() {
+        RedisStandaloneConfiguration cfg = new RedisStandaloneConfiguration();
+        cfg.setPassword("123456");
+        LettuceConnectionFactory fac = new LettuceConnectionFactory(cfg);
+        fac.afterPropertiesSet();
+        StringRedisTemplate client = new StringRedisTemplate(fac);
+        if (Boolean.FALSE.equals(client.hasKey("test"))) {
+            client.opsForValue().set("test", "from test unit");
+        }
+        String value = client.opsForValue().get("test");
+        System.out.println("key:test value:" + value);
+        client.delete("test");
+    }
 }
