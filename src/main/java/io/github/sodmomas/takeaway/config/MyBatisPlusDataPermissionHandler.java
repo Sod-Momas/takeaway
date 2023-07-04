@@ -1,4 +1,4 @@
-package io.github.sodmomas.takeaway.mybatisplus;
+package io.github.sodmomas.takeaway.config;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
  * @since 2021-12-10 13:28
  */
 @Slf4j
-public class MyDataPermissionHandler implements DataPermissionHandler {
+public class MyBatisPlusDataPermissionHandler implements DataPermissionHandler {
 
     @Override
     @SneakyThrows

@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.DataPermissionInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import io.github.sodmomas.takeaway.mybatisplus.MyDataPermissionHandler;
-import io.github.sodmomas.takeaway.mybatisplus.MyMetaObjectHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration(proxyBeanMethods = false)
 @EnableTransactionManagement
 public class MybatisPlusConfig {
-
-
     @Value("${system.config.data-permission-enabled}")
     private Boolean dataPermissionEnabled;
 
@@ -34,7 +30,7 @@ public class MybatisPlusConfig {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         //数据权限
         if (dataPermissionEnabled) {
-            interceptor.addInnerInterceptor(new DataPermissionInterceptor(new MyDataPermissionHandler()));
+            interceptor.addInnerInterceptor(new DataPermissionInterceptor(new MyBatisPlusDataPermissionHandler()));
         }
         //分页插件
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.POSTGRE_SQL));
@@ -48,7 +44,7 @@ public class MybatisPlusConfig {
     @Bean
     public GlobalConfig globalConfig() {
         GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setMetaObjectHandler(new MyMetaObjectHandler());
+        globalConfig.setMetaObjectHandler(new MyBatisPlusMetaObjectHandler());
         return globalConfig;
     }
 

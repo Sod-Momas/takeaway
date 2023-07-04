@@ -1,4 +1,4 @@
-package io.github.sodmomas.takeaway.mybatisplus;
+package io.github.sodmomas.takeaway.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
@@ -10,31 +10,27 @@ import java.time.LocalDateTime;
  * mybatis-plus 字段自动填充
  *
  * @author haoxr
- * @since 2022/10/14
  * @link https://mp.baomidou.com/guide/auto-fill-metainfo.html
+ * @since 2022/10/14
  */
 @Component
-public class MyMetaObjectHandler implements MetaObjectHandler {
+public class MyBatisPlusMetaObjectHandler implements MetaObjectHandler {
 
     /**
      * 新增填充创建时间
-     *
-     * @param metaObject
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.strictInsertFill(metaObject, "createTime", () -> LocalDateTime.now(), LocalDateTime.class);
-        this.strictUpdateFill(metaObject, "updateTime", () -> LocalDateTime.now(), LocalDateTime.class);
+        this.strictInsertFill(metaObject, "createTime", LocalDateTime::now, LocalDateTime.class);
+        this.strictUpdateFill(metaObject, "updateTime", LocalDateTime::now, LocalDateTime.class);
     }
 
     /**
      * 更新填充更新时间
-     *
-     * @param metaObject
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.strictUpdateFill(metaObject, "updateTime", () -> LocalDateTime.now(), LocalDateTime.class);
+        this.strictUpdateFill(metaObject, "updateTime", LocalDateTime::now, LocalDateTime.class);
     }
 
 }
