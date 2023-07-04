@@ -12,6 +12,7 @@ public interface SecurityConstants {
      * 登录接口路径
      */
     String LOGIN_PATH = "/api/v1/auth/login";
+    String LOGOUT_PATH = "/api/v1/auth/logout";
 
     /**
      * Token 前缀
