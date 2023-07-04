@@ -11,11 +11,8 @@ import io.minio.errors.*;
 import io.minio.http.Method;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,10 +28,7 @@ import java.time.LocalDateTime;
  * @author haoxr
  * @since 2022/11/19
  */
-@Component
-@ConditionalOnProperty(value = "oss.type", havingValue = "minio")
-@ConfigurationProperties(prefix = "oss.minio")
-@RequiredArgsConstructor
+@ConfigurationProperties(prefix = "minio")
 @Data
 @Service
 public class MinioOssService {
