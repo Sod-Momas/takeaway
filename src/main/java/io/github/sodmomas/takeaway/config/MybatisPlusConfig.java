@@ -2,6 +2,7 @@ package io.github.sodmomas.takeaway.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
+import com.baomidou.mybatisplus.extension.incrementer.PostgreKeyGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.DataPermissionInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -46,6 +47,14 @@ public class MybatisPlusConfig {
         GlobalConfig globalConfig = new GlobalConfig();
         globalConfig.setMetaObjectHandler(new MyBatisPlusMetaObjectHandler());
         return globalConfig;
+    }
+
+    /**
+     * <a href="https://blog.csdn.net/guashengzan0281/article/details/104312290> mybatis-plus3+postgresql insert 自增序列配置</a>
+     */
+    @Bean
+    PostgreKeyGenerator postgreKeyGenerator() {
+        return new PostgreKeyGenerator();
     }
 
 }
