@@ -1,6 +1,7 @@
 package io.github.sodmomas.takeaway.drug;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.util.Date;
 
@@ -9,7 +10,10 @@ import java.util.Date;
  * @since 2023/7/2
  */
 @TableName("drug")
-public class DrugEntity {
+@KeySequence(dbType = DbType.POSTGRE_SQL, value = "drug_id_sequence")
+public class DrugEntity extends Model<DrugEntity> {
+    @TableId(type = IdType.AUTO)
+    private Long id;
     /**
      * 批准文号
      */
@@ -84,6 +88,17 @@ public class DrugEntity {
      * 药品本位码备注
      */
     private String drugStandardCodeRemark;
+
+    @TableLogic(value = "0", delval = "1")
+    private Integer deleted;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getApprovalNumber() {
         return approvalNumber;
@@ -205,10 +220,19 @@ public class DrugEntity {
         this.drugStandardCodeRemark = drugStandardCodeRemark;
     }
 
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "DrugEntity{" +
-                "approvalNumber='" + approvalNumber + '\'' +
+                "id=" + id +
+                ", approvalNumber='" + approvalNumber + '\'' +
                 ", productName='" + productName + '\'' +
                 ", englishName='" + englishName + '\'' +
                 ", brandName='" + brandName + '\'' +
@@ -223,6 +247,7 @@ public class DrugEntity {
                 ", originalApprovalNumber='" + originalApprovalNumber + '\'' +
                 ", drugStandardCode='" + drugStandardCode + '\'' +
                 ", drugStandardCodeRemark='" + drugStandardCodeRemark + '\'' +
+                ", deleted=" + deleted +
                 '}';
     }
 }
