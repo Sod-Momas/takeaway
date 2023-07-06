@@ -2,24 +2,23 @@ package io.github.sodmomas.takeaway.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.takeaway.common.result.Result;
-import io.github.sodmomas.takeaway.model.vo.DictPageVO;
-import io.github.sodmomas.takeaway.model.vo.DictTypePageVO;
-import io.github.sodmomas.takeaway.service.SysDictService;
-import io.github.sodmomas.takeaway.service.SysDictTypeService;
 import io.github.sodmomas.takeaway.common.model.Option;
 import io.github.sodmomas.takeaway.common.result.PageResult;
+import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.model.form.DictForm;
 import io.github.sodmomas.takeaway.model.form.DictTypeForm;
 import io.github.sodmomas.takeaway.model.query.DictPageQuery;
 import io.github.sodmomas.takeaway.model.query.DictTypePageQuery;
+import io.github.sodmomas.takeaway.model.vo.DictPageVO;
+import io.github.sodmomas.takeaway.model.vo.DictTypePageVO;
+import io.github.sodmomas.takeaway.service.SysDictService;
+import io.github.sodmomas.takeaway.service.SysDictTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,7 +53,6 @@ public class SysDictController {
 
     @Operation(summary = "新增字典", security = {@SecurityRequirement(name = "Authorization")})
     @PostMapping
-    @PreAuthorize("@ss.hasPerm('sys:dict:add')")
     @PreventDuplicateSubmit
     public Result saveDict(
             @RequestBody DictForm DictForm
@@ -65,7 +63,6 @@ public class SysDictController {
 
     @Operation(summary = "修改字典", security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping("/{id}")
-    @PreAuthorize("@ss.hasPerm('sys:dict:edit')")
     public Result updateDict(
             @PathVariable Long id,
             @RequestBody DictForm DictForm
@@ -76,7 +73,6 @@ public class SysDictController {
 
     @Operation(summary = "删除字典", security = {@SecurityRequirement(name = "Authorization")})
     @DeleteMapping("/{ids}")
-    @PreAuthorize("@ss.hasPerm('sys:dict:delete')")
     public Result deleteDict(
             @Parameter(description ="字典ID，多个以英文逗号(,)拼接") @PathVariable String ids
     ) {
@@ -116,7 +112,6 @@ public class SysDictController {
 
     @Operation(summary = "新增字典类型", security = {@SecurityRequirement(name = "Authorization")})
     @PostMapping("/types")
-    @PreAuthorize("@ss.hasPerm('sys:dict_type:add')")
     @PreventDuplicateSubmit
     public Result saveDictType(@RequestBody DictTypeForm dictTypeForm) {
         boolean result = dictTypeService.saveDictType(dictTypeForm);
@@ -125,7 +120,6 @@ public class SysDictController {
 
     @Operation(summary = "修改字典类型", security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping("/types/{id}")
-    @PreAuthorize("@ss.hasPerm('sys:dict_type:edit')")
     public Result updateDictType(@PathVariable Long id, @RequestBody DictTypeForm dictTypeForm) {
         boolean status = dictTypeService.updateDictType(id, dictTypeForm);
         return Result.judge(status);
@@ -133,7 +127,6 @@ public class SysDictController {
 
     @Operation(summary = "删除字典类型", security = {@SecurityRequirement(name = "Authorization")})
     @DeleteMapping("/types/{ids}")
-    @PreAuthorize("@ss.hasPerm('sys:dict_type:delete')")
     public Result deleteDictTypes(
             @Parameter(description ="字典类型ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {

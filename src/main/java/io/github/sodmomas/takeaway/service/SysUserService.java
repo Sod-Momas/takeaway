@@ -10,9 +10,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
-import io.github.sodmomas.takeaway.common.constant.SystemConstants;
-import io.github.sodmomas.takeaway.common.util.SecurityUtils;
 import io.github.sodmomas.takeaway.converter.UserConverter;
 import io.github.sodmomas.takeaway.mapper.SysUserMapper;
 import io.github.sodmomas.takeaway.model.bo.UserBO;
@@ -22,11 +19,9 @@ import io.github.sodmomas.takeaway.model.entity.SysUser;
 import io.github.sodmomas.takeaway.model.form.UserForm;
 import io.github.sodmomas.takeaway.model.query.UserPageQuery;
 import io.github.sodmomas.takeaway.model.vo.UserExportVO;
-import io.github.sodmomas.takeaway.model.vo.UserInfoVO;
 import io.github.sodmomas.takeaway.model.vo.UserPageVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,8 +39,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implements IService<SysUser> {
-
-    private final PasswordEncoder passwordEncoder;
 
     private final SysUserRoleService userRoleService;
 
@@ -112,8 +105,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
         SysUser entity = userConverter.form2Entity(userForm);
 
         // 设置默认加密密码
-        String defaultEncryptPwd = passwordEncoder.encode(SystemConstants.DEFAULT_PASSWORD);
-        entity.setPassword(defaultEncryptPwd);
+        entity.setPassword("defaultEncryptPwd");
 
         // 新增用户
         boolean result = this.save(entity);
@@ -185,7 +177,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     public boolean updatePassword(Long userId, String password) {
         return this.update(new LambdaUpdateWrapper<SysUser>()
                 .eq(SysUser::getId, userId)
-                .set(SysUser::getPassword, passwordEncoder.encode(password))
+                .set(SysUser::getPassword, password)
         );
     }
 
@@ -231,29 +223,6 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
      * @return
      */
 
-    public UserInfoVO getUserLoginInfo() {
-        // 登录用户entity
-        SysUser user = this.getOne(new LambdaQueryWrapper<SysUser>()
-                .eq(SysUser::getUsername, SecurityUtils.getUser().getUsername())
-                .select(
-                        SysUser::getId,
-                        SysUser::getNickname,
-                        SysUser::getAvatar
-                )
-        );
-        // entity->VO
-        UserInfoVO userInfoVO = userConverter.entity2UserInfoVo(user);
-
-        // 用户角色集合
-        Set<String> roles = SecurityUtils.getRoles();
-        userInfoVO.setRoles(roles);
-
-        // 用户权限集合
-        Set<String> perms = (Set<String>) redisTemplate.opsForValue().get(SecurityConstants.USER_PERMS_CACHE_PREFIX + user.getId());
-        userInfoVO.setPerms(perms);
-
-        return userInfoVO;
-    }
 
 
 }

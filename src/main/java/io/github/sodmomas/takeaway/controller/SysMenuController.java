@@ -1,13 +1,13 @@
 package io.github.sodmomas.takeaway.controller;
 
 import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.takeaway.common.result.Result;
-import io.github.sodmomas.takeaway.service.SysMenuService;
 import io.github.sodmomas.takeaway.common.model.Option;
+import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.model.form.MenuForm;
 import io.github.sodmomas.takeaway.model.query.MenuQuery;
 import io.github.sodmomas.takeaway.model.vo.MenuVO;
 import io.github.sodmomas.takeaway.model.vo.RouteVO;
+import io.github.sodmomas.takeaway.service.SysMenuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -68,7 +67,6 @@ public class SysMenuController {
 
     @Operation(summary = "新增菜单",security = {@SecurityRequirement(name = "Authorization")})
     @PostMapping
-    @PreAuthorize("@ss.hasPerm('sys:menu:add')")
     @PreventDuplicateSubmit
     @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
     public Result addMenu(@RequestBody MenuForm menuForm) {
@@ -78,7 +76,6 @@ public class SysMenuController {
 
     @Operation(summary = "修改菜单",security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping(value = "/{id}")
-    @PreAuthorize("@ss.hasPerm('sys:menu:edit')")
     @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
     public Result updateMenu(
             @RequestBody MenuForm menuForm
@@ -89,7 +86,6 @@ public class SysMenuController {
 
     @Operation(summary = "删除菜单",security = {@SecurityRequirement(name = "Authorization")})
     @DeleteMapping("/{id}")
-    @PreAuthorize("@ss.hasPerm('sys:menu:delete')")
     @CacheEvict(cacheNames = "io/github/sodmomas/system", key = "'routes'")
     public Result deleteMenu(
             @Parameter(description ="菜单ID，多个以英文(,)分割") @PathVariable("id") Long id

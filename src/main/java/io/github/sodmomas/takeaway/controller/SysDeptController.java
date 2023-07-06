@@ -1,12 +1,12 @@
 package io.github.sodmomas.takeaway.controller;
 
 import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
-import io.github.sodmomas.takeaway.common.result.Result;
-import io.github.sodmomas.takeaway.model.vo.DeptVO;
-import io.github.sodmomas.takeaway.service.SysDeptService;
 import io.github.sodmomas.takeaway.common.model.Option;
+import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.model.form.DeptForm;
 import io.github.sodmomas.takeaway.model.query.DeptQuery;
+import io.github.sodmomas.takeaway.model.vo.DeptVO;
+import io.github.sodmomas.takeaway.service.SysDeptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,7 +57,6 @@ public class SysDeptController {
 
     @Operation(summary = "新增部门", security = {@SecurityRequirement(name = "Authorization")})
     @PostMapping
-    @PreAuthorize("@ss.hasPerm('sys:dept:add')")
     @PreventDuplicateSubmit
     public Result saveDept(
             @Valid @RequestBody DeptForm formData
@@ -69,7 +67,6 @@ public class SysDeptController {
 
     @Operation(summary = "修改部门", security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping(value = "/{deptId}")
-    @PreAuthorize("@ss.hasPerm('sys:dept:edit')")
     public Result updateDept(
             @PathVariable Long deptId,
             @Valid @RequestBody DeptForm formData
@@ -80,7 +77,6 @@ public class SysDeptController {
 
     @Operation(summary = "删除部门", security = {@SecurityRequirement(name = "Authorization")})
     @DeleteMapping("/{ids}")
-    @PreAuthorize("@ss.hasPerm('sys:dept:delete')")
     public Result deleteDepartments(
             @Parameter(description ="部门ID，多个以英文逗号(,)分割") @PathVariable("ids") String ids
     ) {

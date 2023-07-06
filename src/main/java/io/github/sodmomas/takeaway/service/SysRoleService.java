@@ -9,9 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.sodmomas.takeaway.common.constant.SystemConstants;
 import io.github.sodmomas.takeaway.common.model.Option;
-import io.github.sodmomas.takeaway.common.util.SecurityUtils;
 import io.github.sodmomas.takeaway.converter.RoleConverter;
 import io.github.sodmomas.takeaway.mapper.SysRoleMapper;
 import io.github.sodmomas.takeaway.model.entity.SysRole;
@@ -64,7 +62,6 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> implemen
                                                 .or()
                                                 .like(StrUtil.isNotBlank(keywords), SysRole::getCode, keywords)
                         )
-                        .ne(!SecurityUtils.isRoot(), SysRole::getCode, SystemConstants.ROOT_ROLE_CODE) // 非超级管理员不显示超级管理员角色
         );
 
         // 实体转换
@@ -81,7 +78,6 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> implemen
     public List<Option> listRoleOptions() {
         // 查询数据
         List<SysRole> roleList = this.list(new LambdaQueryWrapper<SysRole>()
-                .ne(!SecurityUtils.isRoot(), SysRole::getCode, SystemConstants.ROOT_ROLE_CODE)
                 .select(SysRole::getId, SysRole::getName)
                 .orderByAsc(SysRole::getSort)
         );

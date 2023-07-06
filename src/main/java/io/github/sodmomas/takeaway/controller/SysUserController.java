@@ -6,11 +6,10 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.sodmomas.takeaway.common.annotation.PreventDuplicateSubmit;
 import io.github.sodmomas.takeaway.common.constant.ExcelConstants;
-import io.github.sodmomas.takeaway.common.result.Result;
-import io.github.sodmomas.takeaway.listener.easyexcel.UserImportListener;
-import io.github.sodmomas.takeaway.service.SysUserService;
 import io.github.sodmomas.takeaway.common.result.PageResult;
+import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.common.util.ExcelUtils;
+import io.github.sodmomas.takeaway.listener.easyexcel.UserImportListener;
 import io.github.sodmomas.takeaway.model.entity.SysUser;
 import io.github.sodmomas.takeaway.model.form.UserForm;
 import io.github.sodmomas.takeaway.model.query.UserPageQuery;
@@ -18,6 +17,7 @@ import io.github.sodmomas.takeaway.model.vo.UserExportVO;
 import io.github.sodmomas.takeaway.model.vo.UserImportVO;
 import io.github.sodmomas.takeaway.model.vo.UserInfoVO;
 import io.github.sodmomas.takeaway.model.vo.UserPageVO;
+import io.github.sodmomas.takeaway.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,7 +27,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,7 +62,6 @@ public class SysUserController {
 
     @Operation(summary = "新增用户", security = {@SecurityRequirement(name = "Authorization")})
     @PostMapping
-    @PreAuthorize("@ss.hasPerm('sys:user:add')")
     @PreventDuplicateSubmit
     public Result saveUser(
             @RequestBody @Valid UserForm userForm
@@ -83,7 +81,6 @@ public class SysUserController {
 
     @Operation(summary = "修改用户", security = {@SecurityRequirement(name = "Authorization")})
     @PutMapping(value = "/{userId}")
-    @PreAuthorize("@ss.hasPerm('sys:user:edit')")
     public Result updateUser(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestBody @Validated UserForm userForm) {
@@ -93,7 +90,6 @@ public class SysUserController {
 
     @Operation(summary = "删除用户", security = {@SecurityRequirement(name = "Authorization")})
     @DeleteMapping("/{ids}")
-    @PreAuthorize("@ss.hasPerm('sys:user:delete')")
     public Result deleteUsers(
             @Parameter(description = "用户ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
@@ -103,7 +99,6 @@ public class SysUserController {
 
     @Operation(summary = "修改用户密码", security = {@SecurityRequirement(name = "Authorization")})
     @PatchMapping(value = "/{userId}/password")
-    @PreAuthorize("@ss.hasPerm('sys:user:reset_pwd')")
     public Result updatePassword(
             @Parameter(description = "用户ID") @PathVariable Long userId,
             @RequestParam String password
@@ -128,8 +123,7 @@ public class SysUserController {
     @Operation(summary = "获取当前登录用户信息", security = {@SecurityRequirement(name = "Authorization")})
     @GetMapping("/me")
     public Result<UserInfoVO> getUserLoginInfo() {
-        UserInfoVO userInfoVO = userService.getUserLoginInfo();
-        return Result.success(userInfoVO);
+        return Result.success(new UserInfoVO());
     }
 
     @Operation(summary = "用户导入模板下载", security = {@SecurityRequirement(name = "Authorization")})

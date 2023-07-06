@@ -7,7 +7,6 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import io.github.sodmomas.takeaway.common.constant.SystemConstants;
 import io.github.sodmomas.takeaway.common.base.IBaseEnum;
 import io.github.sodmomas.takeaway.common.enums.GenderEnum;
 import io.github.sodmomas.takeaway.common.enums.StatusEnum;
@@ -20,7 +19,6 @@ import io.github.sodmomas.takeaway.service.SysRoleService;
 import io.github.sodmomas.takeaway.service.SysUserRoleService;
 import io.github.sodmomas.takeaway.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,8 +49,6 @@ public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
 
     private final SysUserService userService;
 
-    private final PasswordEncoder passwordEncoder;
-
     private final UserConverter userConverter;
 
     private final SysRoleService roleService;
@@ -62,7 +58,6 @@ public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
     public UserImportListener(Long deptId) {
         this.deptId = deptId;
         this.userService = SpringUtil.getBean(SysUserService.class);
-        this.passwordEncoder = SpringUtil.getBean(PasswordEncoder.class);
         this.roleService = SpringUtil.getBean(SysRoleService.class);
         this.userRoleService = SpringUtil.getBean(SysUserRoleService.class);
         this.userConverter = SpringUtil.getBean(UserConverter.class);
@@ -111,7 +106,6 @@ public class UserImportListener extends MyAnalysisEventListener<UserImportVO> {
             // 校验通过，持久化至数据库
             SysUser entity = userConverter.importVo2Entity(userImportVO);
             entity.setDeptId(deptId);   // 部门
-            entity.setPassword(passwordEncoder.encode(SystemConstants.DEFAULT_PASSWORD));   // 默认密码
             // 性别翻译
             String genderLabel = userImportVO.getGender();
             if (StrUtil.isNotBlank(genderLabel)) {
