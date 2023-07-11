@@ -1,6 +1,14 @@
 # takeaway
 外卖系统
 
+## todo
+- [x] 药品管理
+- [x] 用户管理
+- [x] 登录退出
+- [ ] 处方管理
+- [ ] 订单管理
+- [ ] 账户余额
+
 # Getting Started
 
 ### Reference Documentation
