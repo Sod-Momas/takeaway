@@ -1,4 +1,4 @@
-package io.github.sodmomas.takeaway.drug;
+package io.github.sodmomas.takeaway.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

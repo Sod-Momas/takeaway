@@ -1,6 +1,7 @@
 package io.github.sodmomas.takeaway.controller;
 
 import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.common.enums.RoleEnum;
 import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.model.dto.LoginResult;
 import io.github.sodmomas.takeaway.service.AuthService;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "01.认证中心")
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/v1/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
@@ -28,7 +29,7 @@ public class AuthController {
             @Parameter(description = "用户名", example = "admin") @RequestParam String username,
             @Parameter(description = "密码", example = "123456") @RequestParam String password
     ) {
-        LoginResult result = authService.login(username, password);
+        LoginResult result = authService.login(username, password, RoleEnum.OPERATOR);
         return Result.success(result);
     }
 

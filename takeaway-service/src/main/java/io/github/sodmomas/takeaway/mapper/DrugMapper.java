@@ -1,6 +1,7 @@
-package io.github.sodmomas.takeaway.drug;
+package io.github.sodmomas.takeaway.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.github.sodmomas.takeaway.model.entity.DrugEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

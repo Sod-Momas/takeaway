@@ -3,6 +3,7 @@ package io.github.sodmomas.takeaway.service;
 import cn.hutool.json.JSONUtil;
 import io.github.sodmomas.takeaway.common.constant.RedisKeyConstants;
 import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
+import io.github.sodmomas.takeaway.common.enums.RoleEnum;
 import io.github.sodmomas.takeaway.common.exception.BusinessException;
 import io.github.sodmomas.takeaway.model.dto.LoginResult;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
@@ -25,7 +26,7 @@ public class AuthService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    public LoginResult login(String username, String password) {
+    public LoginResult login(String username, String password,RoleEnum role) {
         // 获取登录账号信息
         final UserAuthInfo user = sysUserService.getUserAuthInfo(username);
         if (user == null) {
@@ -35,6 +36,10 @@ public class AuthService {
         if (!user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)))) {
             // 密码不正确
             throw new BusinessException("登录失败，请检查用户名或密码");
+        }
+        if (!user.getRoles().contains(role.getDesc())) {
+            // 角色错误
+            throw new BusinessException("登录失败，请检查用户角色");
         }
         // 登录凭证
         final String accessToken = UUID.randomUUID().toString().replaceAll("-", "");

@@ -1,8 +1,8 @@
 package io.github.sodmomas.takeaway;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import io.github.sodmomas.takeaway.drug.DrugEntity;
-import io.github.sodmomas.takeaway.drug.DrugMapper;
+import io.github.sodmomas.takeaway.model.entity.DrugEntity;
+import io.github.sodmomas.takeaway.mapper.DrugMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

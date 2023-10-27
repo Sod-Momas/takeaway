@@ -1,7 +1,9 @@
-package io.github.sodmomas.takeaway.drug;
+package io.github.sodmomas.takeaway.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.github.sodmomas.takeaway.model.entity.DrugEntity;
+import io.github.sodmomas.takeaway.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
