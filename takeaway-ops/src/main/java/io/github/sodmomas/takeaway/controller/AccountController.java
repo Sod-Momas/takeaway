@@ -30,4 +30,22 @@ public class AccountController {
     Result<Page<Account>> page(@RequestBody PageDTO<Account> query) {
         return Result.success(accountService.page(query));
     }
+
+    @PostMapping("edit")
+    Result<Long> edit(@RequestBody Account account) {
+        accountService.edit(account);
+        return Result.success(account.getId());
+    }
+
+    @PostMapping("enable")
+    Result<Long> enable(@RequestBody Account account) {
+        accountService.enable(account.getId());
+        return Result.success(account.getId());
+    }
+
+    @PostMapping("disable")
+    Result<Long> disable(@RequestBody Account account) {
+        accountService.disable(account.getId());
+        return Result.success(account.getId());
+    }
 }
