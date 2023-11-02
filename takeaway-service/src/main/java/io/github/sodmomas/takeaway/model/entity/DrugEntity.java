@@ -2,6 +2,8 @@ package io.github.sodmomas.takeaway.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
@@ -9,6 +11,8 @@ import java.util.Date;
  * @author Sod-Momas
  * @since 2023/7/2
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("drug")
 @KeySequence(dbType = DbType.POSTGRE_SQL, value = "drug_id_sequence")
 public class DrugEntity extends Model<DrugEntity> {
@@ -88,166 +92,11 @@ public class DrugEntity extends Model<DrugEntity> {
      * 药品本位码备注
      */
     private String drugStandardCodeRemark;
+    /**
+     * 是否发布, 1-上架, 0-下架
+     */
+    private Integer published;
 
     @TableLogic(value = "0", delval = "1")
     private Integer deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getApprovalNumber() {
-        return approvalNumber;
-    }
-
-    public void setApprovalNumber(String approvalNumber) {
-        this.approvalNumber = approvalNumber;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getEnglishName() {
-        return englishName;
-    }
-
-    public void setEnglishName(String englishName) {
-        this.englishName = englishName;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public String getDosageForm() {
-        return dosageForm;
-    }
-
-    public void setDosageForm(String dosageForm) {
-        this.dosageForm = dosageForm;
-    }
-
-    public String getSpecification() {
-        return specification;
-    }
-
-    public void setSpecification(String specification) {
-        this.specification = specification;
-    }
-
-    public String getLicenseHolder() {
-        return licenseHolder;
-    }
-
-    public void setLicenseHolder(String licenseHolder) {
-        this.licenseHolder = licenseHolder;
-    }
-
-    public String getLicenseHolderAddress() {
-        return licenseHolderAddress;
-    }
-
-    public void setLicenseHolderAddress(String licenseHolderAddress) {
-        this.licenseHolderAddress = licenseHolderAddress;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public Date getApprovalDate() {
-        return approvalDate;
-    }
-
-    public void setApprovalDate(Date approvalDate) {
-        this.approvalDate = approvalDate;
-    }
-
-    public String getManufacturingAddress() {
-        return manufacturingAddress;
-    }
-
-    public void setManufacturingAddress(String manufacturingAddress) {
-        this.manufacturingAddress = manufacturingAddress;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public String getOriginalApprovalNumber() {
-        return originalApprovalNumber;
-    }
-
-    public void setOriginalApprovalNumber(String originalApprovalNumber) {
-        this.originalApprovalNumber = originalApprovalNumber;
-    }
-
-    public String getDrugStandardCode() {
-        return drugStandardCode;
-    }
-
-    public void setDrugStandardCode(String drugStandardCode) {
-        this.drugStandardCode = drugStandardCode;
-    }
-
-    public String getDrugStandardCodeRemark() {
-        return drugStandardCodeRemark;
-    }
-
-    public void setDrugStandardCodeRemark(String drugStandardCodeRemark) {
-        this.drugStandardCodeRemark = drugStandardCodeRemark;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    @Override
-    public String toString() {
-        return "DrugEntity{" +
-                "id=" + id +
-                ", approvalNumber='" + approvalNumber + '\'' +
-                ", productName='" + productName + '\'' +
-                ", englishName='" + englishName + '\'' +
-                ", brandName='" + brandName + '\'' +
-                ", dosageForm='" + dosageForm + '\'' +
-                ", specification='" + specification + '\'' +
-                ", licenseHolder='" + licenseHolder + '\'' +
-                ", licenseHolderAddress='" + licenseHolderAddress + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", approvalDate=" + approvalDate +
-                ", manufacturingAddress='" + manufacturingAddress + '\'' +
-                ", productCategory='" + productCategory + '\'' +
-                ", originalApprovalNumber='" + originalApprovalNumber + '\'' +
-                ", drugStandardCode='" + drugStandardCode + '\'' +
-                ", drugStandardCodeRemark='" + drugStandardCodeRemark + '\'' +
-                ", deleted=" + deleted +
-                '}';
-    }
 }
