@@ -38,6 +38,7 @@ public class DrugService extends ServiceImpl<DrugMapper, DrugEntity> {
      *
      * @param drug 药品信息
      */
+    @Transactional(rollbackFor = Exception.class)
     public void edit(DrugEntity drug) {
         Assert.notNull(drug.getId(), "id为空");
         Assert.notBlank(drug.getProductName(), "产品名称为空");
