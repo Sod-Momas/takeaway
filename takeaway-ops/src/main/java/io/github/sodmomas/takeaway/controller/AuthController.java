@@ -2,11 +2,10 @@ package io.github.sodmomas.takeaway.controller;
 
 import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
 import io.github.sodmomas.takeaway.common.enums.RoleEnum;
-import io.github.sodmomas.takeaway.common.result.Result;
 import io.github.sodmomas.takeaway.model.dto.LoginResult;
+import io.github.sodmomas.takeaway.model.query.LoginQuery;
 import io.github.sodmomas.takeaway.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "01.认证中心")
 @RestController
-@RequestMapping("/v1/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
@@ -25,18 +24,13 @@ public class AuthController {
 
     @Operation(summary = "登录")
     @PostMapping("/login")
-    public Result<LoginResult> login(
-            @Parameter(description = "用户名", example = "admin") @RequestParam String username,
-            @Parameter(description = "密码", example = "123456") @RequestParam String password
-    ) {
-        LoginResult result = authService.login(username, password, RoleEnum.OPERATOR);
-        return Result.success(result);
+    public LoginResult login(@RequestBody LoginQuery query) {
+        return authService.login(query.getUsername(), query.getPassword(), RoleEnum.OPERATOR);
     }
 
     @Operation(summary = "注销", security = {@SecurityRequirement(name = SecurityConstants.TOKEN_KEY)})
     @DeleteMapping("/logout")
-    public Result<?> logout(@RequestHeader("Authorization") String accessToken) {
+    public void logout(@RequestHeader("Authorization") String accessToken) {
         authService.logout(accessToken);
-        return Result.success();
     }
 }

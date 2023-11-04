@@ -1,7 +1,7 @@
 package io.github.sodmomas.takeaway;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import io.github.sodmomas.takeaway.model.entity.DrugEntity;
+import io.github.sodmomas.takeaway.model.entity.Drug;
 import io.github.sodmomas.takeaway.mapper.DrugMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ import java.util.List;
 
     @Test
     void addDrug() {
-        DrugEntity drug = new DrugEntity();
+        Drug drug = new Drug();
         drug.setApprovalNumber("国药准字H23023610");
         drug.setProductName("阿司匹林维C肠溶片");
         drug.setEnglishName("Asipilin Vitamin C Enteric-coated Tablets");
@@ -65,7 +65,7 @@ import java.util.List;
 
     @Test
     void listDrug() {
-        final List<DrugEntity> drugs = drugMapper.selectList(Wrappers.emptyWrapper());
+        final List<Drug> drugs = drugMapper.selectList(Wrappers.emptyWrapper());
         System.out.println(drugs);
     }
     @Test

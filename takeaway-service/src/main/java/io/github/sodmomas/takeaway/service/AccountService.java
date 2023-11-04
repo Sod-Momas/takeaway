@@ -3,7 +3,6 @@ package io.github.sodmomas.takeaway.service;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.sodmomas.takeaway.converter.AccountConverter;
 import io.github.sodmomas.takeaway.mapper.AccountMapper;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
 import io.github.sodmomas.takeaway.model.entity.Account;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @Service
 public class AccountService extends ServiceImpl<AccountMapper, Account> {
     private @Autowired RelAccountRoleService relAccountRoleService;
-    private @Autowired AccountConverter accountConverter;
 
     public void addAccount(Account account) {
         Assert.notBlank(account.getNickname(), "用户昵称为空");
@@ -66,13 +64,13 @@ public class AccountService extends ServiceImpl<AccountMapper, Account> {
         super.updateById(account);
     }
 
-    public void disable(Long id) {
+    public void disable(Integer id) {
         Assert.notNull(id, "id为空");
         // 禁用账号，enabled设置为false
         super.update(Wrappers.<Account>lambdaUpdate().eq(Account::getId, id).set(Account::getEnabled, false));
     }
 
-    public void enable(Long id) {
+    public void enable(Integer id) {
         Assert.notNull(id, "id为空");
         // 启用账号，enabled设置为true
         super.update(Wrappers.<Account>lambdaUpdate().eq(Account::getId, id).set(Account::getEnabled, true));
@@ -88,7 +86,13 @@ public class AccountService extends ServiceImpl<AccountMapper, Account> {
                 .map(RelAccountRole::getRoleId)
                 .collect(Collectors.toSet());
 
-        UserAuthInfo userAuthInfo = accountConverter.toUserAuthInfo(account);
+
+        UserAuthInfo userAuthInfo = new UserAuthInfo();
+        userAuthInfo.setAccountId(account.getId());
+        userAuthInfo.setUsername(account.getUsername());
+        userAuthInfo.setNickname(account.getNickname());
+        userAuthInfo.setPassword(account.getPassword());
+        userAuthInfo.setEnabled(account.getEnabled());
         userAuthInfo.setRoles(roleIds);
         return userAuthInfo;
     }

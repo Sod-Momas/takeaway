@@ -1,36 +1,47 @@
 
 
-CREATE TABLE public.t_account
+-- SEQUENCE: public.t_account_sequence
+-- DROP SEQUENCE IF EXISTS public.t_account_sequence;
+CREATE SEQUENCE IF NOT EXISTS public.t_account_sequence
+    INCREMENT 1
+    START 10
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+ALTER SEQUENCE public.t_account_sequence OWNER TO takeaway;
+-- Table: public.t_account
+-- DROP TABLE IF EXISTS public.t_account;
+CREATE TABLE IF NOT EXISTS public.t_account
 (
-    id bigint,
-    username character varying,
-    nickname character varying,
-    password character varying,
-    email character varying,
-    phone character varying,
+    id integer NOT NULL DEFAULT nextval('t_account_sequence'::regclass),
+    username character varying COLLATE pg_catalog."default",
+    nickname character varying COLLATE pg_catalog."default",
+    password character varying COLLATE pg_catalog."default",
+    email character varying COLLATE pg_catalog."default",
+    phone character varying COLLATE pg_catalog."default",
     create_time timestamp without time zone,
     update_time timestamp without time zone,
-    PRIMARY KEY (id)
-);
-
+    enabled boolean NOT NULL DEFAULT true,
+    CONSTRAINT t_account_pkey PRIMARY KEY (id)
+) TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public.t_account OWNER to takeaway;
+
+INSERT INTO public.t_account ( id, username, nickname, password, email, phone, create_time, update_time, enabled) VALUES
+	(1, 'sod', 'Sod-Momas', MD5('123456'), 'sod@qq.com', '17600000000', NOW()	, NOW(), true);
+
 
 -- SEQUENCE: public.t_rel_account_role_sequence
 -- DROP SEQUENCE IF EXISTS public.t_rel_account_role_sequence;
 CREATE SEQUENCE IF NOT EXISTS public.t_rel_account_role_sequence
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807
-    CACHE 1;
+    INCREMENT 1 START 10 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 ALTER SEQUENCE public.t_rel_account_role_sequence OWNER TO takeaway;
 
 -- Table: public.t_rel_account_role
 -- DROP TABLE IF EXISTS public.t_rel_account_role;
 CREATE TABLE IF NOT EXISTS public.t_rel_account_role
 (
-    id bigint NOT NULL DEFAULT nextval('t_rel_account_role_sequence'::regclass),
-    account_id bigint,
+    id integer NOT NULL DEFAULT nextval('t_rel_account_role_sequence'::regclass),
+    account_id integer,
     role_id integer,
     create_time timestamp without time zone,
     update_time timestamp without time zone,
@@ -47,14 +58,14 @@ COMMENT ON COLUMN public.t_rel_account_role.update_time IS '更新时间';
 -- SEQUENCE: public.drug_id_sequence
 -- DROP SEQUENCE IF EXISTS public.drug_id_sequence;
 CREATE SEQUENCE IF NOT EXISTS public.drug_id_sequence
-    INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+    INCREMENT 1 START 10 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 ALTER SEQUENCE public.drug_id_sequence OWNER TO takeaway;
 
 -- Table: public.drug
 -- DROP TABLE IF EXISTS public.drug;
 CREATE TABLE IF NOT EXISTS public.drug
 (
-    id bigint NOT NULL DEFAULT nextval('drug_id_sequence'::regclass),
+    id integer NOT NULL DEFAULT nextval('drug_id_sequence'::regclass),
     approval_number character varying(255) ,
     product_name character varying(255) ,
     english_name character varying(255) ,

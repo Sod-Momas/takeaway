@@ -16,9 +16,9 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("drug")
 @KeySequence(dbType = DbType.POSTGRE_SQL, value = "drug_id_sequence")
-public class DrugEntity extends Model<DrugEntity> {
+public class Drug extends Model<Drug> {
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private Integer id;
     /**
      * 批准文号
      */

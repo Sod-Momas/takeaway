@@ -17,7 +17,7 @@ public class DrugListQuery {
     @Schema(description = "页容量")
     private Integer size;
     @Schema(description = "id")
-    private List<Long> id;
+    private List<Integer> id;
     @Schema(description = "生产单位")
     private String manufacturer;
     @Schema(description = "产品名称")

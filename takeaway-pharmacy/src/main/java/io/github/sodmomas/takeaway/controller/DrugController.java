@@ -3,7 +3,7 @@ package io.github.sodmomas.takeaway.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.github.sodmomas.takeaway.model.entity.DrugEntity;
+import io.github.sodmomas.takeaway.model.entity.Drug;
 import io.github.sodmomas.takeaway.model.query.DrugListFilterQuery;
 import io.github.sodmomas.takeaway.model.query.DrugListQuery;
 import io.github.sodmomas.takeaway.model.vo.FilterVO;
@@ -30,43 +30,43 @@ public class DrugController {
     }
 
     @PostMapping("/page")
-    Page<DrugEntity> list(@RequestBody DrugListQuery query) {
-        Wrapper<DrugEntity> wrapper = Wrappers.<DrugEntity>lambdaQuery()
+    Page<Drug> list(@RequestBody DrugListQuery query) {
+        Wrapper<Drug> wrapper = Wrappers.<Drug>lambdaQuery()
                 // id 查询
-                .in(DrugEntity::getId, query.getId())
+                .in(Drug::getId, query.getId())
                 // 厂商查询
-                .in(DrugEntity::getManufacturer, query.getManufacturer())
+                .in(Drug::getManufacturer, query.getManufacturer())
                 // 产品名查询
-                .in(DrugEntity::getProductName, query.getProductName())
+                .in(Drug::getProductName, query.getProductName())
                 // 上架下架状态查询
-                .in(DrugEntity::getPublished, query.getPublished());
+                .in(Drug::getPublished, query.getPublished());
         return drugService.page(Page.of(query.getPage(), query.getSize()), wrapper);
     }
 
     @GetMapping("/drug/{id}")
-    DrugEntity get(@PathVariable("id") Long id) {
+    Drug get(@PathVariable("id") Integer id) {
         return drugService.getById(id);
     }
 
     @PostMapping("/add")
-    Long add(@RequestBody DrugEntity drug) {
+    Integer add(@RequestBody Drug drug) {
         drugService.add(drug);
         return drug.getId();
     }
 
     @PostMapping("/edit")
-    Long edit(@RequestBody DrugEntity drug) {
+    Integer edit(@RequestBody Drug drug) {
         drugService.edit(drug);
         return drug.getId();
     }
 
     @PostMapping("/up")
-    void up(@RequestBody @NotEmpty(message = "id为空") List<Long> ids) {
+    void up(@RequestBody @NotEmpty(message = "id为空") List<Integer> ids) {
         drugService.up(ids);
     }
 
     @PostMapping("/down")
-    void down(@RequestBody @NotEmpty(message = "id为空") List<Long> ids) {
+    void down(@RequestBody @NotEmpty(message = "id为空") List<Integer> ids) {
         drugService.down(ids);
     }
 }

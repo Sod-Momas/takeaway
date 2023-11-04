@@ -1,14 +1,12 @@
 package io.github.sodmomas.takeaway.service;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.github.sodmomas.takeaway.common.constant.RedisKeyConstants;
 import io.github.sodmomas.takeaway.common.constant.SecurityConstants;
 import io.github.sodmomas.takeaway.common.enums.RoleEnum;
 import io.github.sodmomas.takeaway.common.exception.BusinessException;
 import io.github.sodmomas.takeaway.model.dto.LoginResult;
 import io.github.sodmomas.takeaway.model.dto.UserAuthInfo;
-import io.github.sodmomas.takeaway.model.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -24,13 +22,11 @@ import java.util.UUID;
 @Service
 public class AuthService {
     @Autowired
-    private SysUserService sysUserService;
-    @Autowired
     private AccountService accountService;
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    public LoginResult login(String username, String password,RoleEnum role) {
+    public LoginResult login(String username, String password, RoleEnum role) {
         // 获取登录账号信息
         final UserAuthInfo user = accountService.loginByUsername(username);
         if (user == null) {

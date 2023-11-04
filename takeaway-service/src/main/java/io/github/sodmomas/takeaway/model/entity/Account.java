@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @TableName("t_account")
 public class Account extends BaseEntity {
     @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+    private Integer id;
     private String username;
     private String nickname;
     private String password;
