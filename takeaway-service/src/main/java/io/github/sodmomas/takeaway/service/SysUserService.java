@@ -181,28 +181,28 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
         );
     }
 
-    /**
-     * 根据用户名获取认证信息
-     *
-     * @param username 用户名
-     * @return 用户认证信息 {@link UserAuthInfo}
-     */
-
-    public UserAuthInfo getUserAuthInfo(String username) {
-        UserAuthInfo userAuthInfo = this.baseMapper.getUserAuthInfo(username);
-        if (userAuthInfo != null) {
-            Set<String> roles = userAuthInfo.getRoles();
-            if (CollectionUtil.isNotEmpty(roles)) {
-                Set<String> perms = menuService.listRolePerms(roles);
-                userAuthInfo.setPerms(perms);
-            }
-
-            // 获取最大范围的数据权限
-            Integer dataScope = roleService.getMaximumDataScope(roles);
-            userAuthInfo.setDataScope(dataScope);
-        }
-        return userAuthInfo;
-    }
+//    /**
+//     * 根据用户名获取认证信息
+//     *
+//     * @param username 用户名
+//     * @return 用户认证信息 {@link UserAuthInfo}
+//     */
+//
+//    public UserAuthInfo getUserAuthInfo(String username) {
+//        UserAuthInfo userAuthInfo = this.baseMapper.getUserAuthInfo(username);
+//        if (userAuthInfo != null) {
+//            Set<String> roles = userAuthInfo.getRoles();
+//            if (CollectionUtil.isNotEmpty(roles)) {
+//                Set<String> perms = menuService.listRolePerms(roles);
+//                userAuthInfo.setPerms(perms);
+//            }
+//
+//            // 获取最大范围的数据权限
+//            Integer dataScope = roleService.getMaximumDataScope(roles);
+//            userAuthInfo.setDataScope(dataScope);
+//        }
+//        return userAuthInfo;
+//    }
 
 
     /**

@@ -9,27 +9,13 @@ import java.util.Set;
  *
  * @author haoxr
  * @since 2022/10/22
- *
  */
 @Data
 public class UserAuthInfo {
-
-    private Long userId;
-
+    private Long accountId;
     private String username;
-
     private String nickname;
-
-    private Long deptId;
-
     private String password;
-
-    private Integer status;
-
-    private Set<String> roles;
-
-    private Set<String> perms;
-
-    private Integer dataScope;
-
+    private Boolean enabled;
+    private Set<Integer> roles;
 }

@@ -1,4 +1,5 @@
 
+
 CREATE TABLE public.t_account
 (
     id bigint,
@@ -12,20 +13,45 @@ CREATE TABLE public.t_account
     PRIMARY KEY (id)
 );
 
-ALTER TABLE IF EXISTS public.t_account
-    OWNER to takeaway;
+ALTER TABLE IF EXISTS public.t_account OWNER to takeaway;
+
+-- SEQUENCE: public.t_rel_account_role_sequence
+-- DROP SEQUENCE IF EXISTS public.t_rel_account_role_sequence;
+CREATE SEQUENCE IF NOT EXISTS public.t_rel_account_role_sequence
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+ALTER SEQUENCE public.t_rel_account_role_sequence OWNER TO takeaway;
+
+-- Table: public.t_rel_account_role
+-- DROP TABLE IF EXISTS public.t_rel_account_role;
+CREATE TABLE IF NOT EXISTS public.t_rel_account_role
+(
+    id bigint NOT NULL DEFAULT nextval('t_rel_account_role_sequence'::regclass),
+    account_id bigint,
+    role_id integer,
+    create_time timestamp without time zone,
+    update_time timestamp without time zone,
+    CONSTRAINT rar_pkey PRIMARY KEY (id)
+)
+TABLESPACE pg_default;
+ALTER TABLE IF EXISTS public.t_rel_account_role OWNER to takeaway;
+COMMENT ON TABLE public.t_rel_account_role IS '账号角色信息表';
+COMMENT ON COLUMN public.t_rel_account_role.account_id IS '账号id';
+COMMENT ON COLUMN public.t_rel_account_role.role_id IS '角色：1-患者，2-药店，3-医师药师，4-系统管理员';
+COMMENT ON COLUMN public.t_rel_account_role.create_time IS '创建时间';
+COMMENT ON COLUMN public.t_rel_account_role.update_time IS '更新时间';
 
 -- SEQUENCE: public.drug_id_sequence
 -- DROP SEQUENCE IF EXISTS public.drug_id_sequence;
-
 CREATE SEQUENCE IF NOT EXISTS public.drug_id_sequence
     INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
-
 ALTER SEQUENCE public.drug_id_sequence OWNER TO takeaway;
 
 -- Table: public.drug
 -- DROP TABLE IF EXISTS public.drug;
-
 CREATE TABLE IF NOT EXISTS public.drug
 (
     id bigint NOT NULL DEFAULT nextval('drug_id_sequence'::regclass),
