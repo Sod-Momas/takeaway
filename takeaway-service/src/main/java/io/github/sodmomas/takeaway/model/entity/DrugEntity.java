@@ -2,6 +2,7 @@ package io.github.sodmomas.takeaway.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -97,6 +98,7 @@ public class DrugEntity extends Model<DrugEntity> {
      */
     private Integer published;
 
-    @TableLogic(value = "0", delval = "1")
+    @TableLogic
+    @JsonIgnore
     private Integer deleted;
 }
