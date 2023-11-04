@@ -55,6 +55,13 @@ COMMENT ON COLUMN public.t_rel_account_role.role_id IS '角色：1-患者，2-�
 COMMENT ON COLUMN public.t_rel_account_role.create_time IS '创建时间';
 COMMENT ON COLUMN public.t_rel_account_role.update_time IS '更新时间';
 
+INSERT INTO public.t_rel_account_role( id, account_id, role_id, create_time, update_time) VALUES
+ (1,1,1,NOW(),NOW())
+,(2,1,2,NOW(),NOW())
+,(3,1,3,NOW(),NOW())
+,(4,1,4,NOW(),NOW())
+;
+
 -- SEQUENCE: public.drug_id_sequence
 -- DROP SEQUENCE IF EXISTS public.drug_id_sequence;
 CREATE SEQUENCE IF NOT EXISTS public.drug_id_sequence
