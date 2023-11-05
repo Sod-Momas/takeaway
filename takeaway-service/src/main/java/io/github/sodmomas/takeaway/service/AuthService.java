@@ -54,9 +54,9 @@ public class AuthService {
         redisTemplate.opsForValue().set(RedisKeyConstants.REFRESH_TOKEN_PREFIX + ":" + accessToken, refreshToken);
         // 把登录凭证返回给前端
         return LoginResult.builder()
-                .tokenType(SecurityConstants.ACCESS_TOKEN_PREFIX)
+//                .tokenType(SecurityConstants.ACCESS_TOKEN_PREFIX)
                 .refreshToken(refreshToken)
-                .accessToken(SecurityConstants.ACCESS_TOKEN_PREFIX + accessToken)
+                .accessToken(accessToken)
                 .expires(SecurityConstants.TIMEOUT)
                 .build();
     }

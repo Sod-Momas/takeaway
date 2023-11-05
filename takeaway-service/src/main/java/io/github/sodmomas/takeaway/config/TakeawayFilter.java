@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -46,8 +47,11 @@ public class TakeawayFilter extends OncePerRequestFilter {
                 // 不需要验证身份，直接请求接口
                 filterChain.doFilter(request, response);
             } else {
-                String token = request.getHeader(SecurityConstants.TOKEN_KEY);
-                String redisKey = RedisKeyConstants.ACCESS_TOKEN_PREFIX + ":" + token;
+                // ACCESS_TOKEN:f8f72434dc5a41879ecfafce6dfcd42e
+                String redisKey = Optional.ofNullable(request.getHeader(SecurityConstants.TOKEN_KEY))
+                        .map(e -> e.replaceFirst("Bearer ", ""))
+                        .map(e -> RedisKeyConstants.ACCESS_TOKEN_PREFIX + ":" + e)
+                        .orElse("");
                 if (Boolean.TRUE.equals(redisTemplate.hasKey(redisKey))) {
                     // token存在且有效
                     String json = redisTemplate.opsForValue().get(redisKey);
