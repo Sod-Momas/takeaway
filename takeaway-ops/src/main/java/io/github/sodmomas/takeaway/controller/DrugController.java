@@ -1,5 +1,6 @@
 package io.github.sodmomas.takeaway.controller;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -33,13 +34,13 @@ public class DrugController {
     Page<Drug> list(@RequestBody DrugListQuery query) {
         Wrapper<Drug> wrapper = Wrappers.<Drug>lambdaQuery()
                 // id 查询
-                .in(Drug::getId, query.getId())
+                .in(CollectionUtil.isNotEmpty(query.getId()), Drug::getId, query.getId())
                 // 厂商查询
-                .in(Drug::getManufacturer, query.getManufacturer())
+                .eq(null != query.getManufacturer(), Drug::getManufacturer, query.getManufacturer())
                 // 产品名查询
-                .in(Drug::getProductName, query.getProductName())
+                .eq(null != query.getProductName(), Drug::getProductName, query.getProductName())
                 // 上架下架状态查询
-                .in(Drug::getPublished, query.getPublished());
+                .eq(null != query.getPublished(), Drug::getPublished, query.getPublished());
         return drugService.page(Page.of(query.getPage(), query.getSize()), wrapper);
     }
 
