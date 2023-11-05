@@ -9,7 +9,7 @@ import java.util.List;
  * @since 2023/11/5
  */
 @Data
-public class PharmacyRpList {
+public class PharmacyRpDetail {
     private Integer id;
     private Integer pharmacyId;
     private Integer patientId;

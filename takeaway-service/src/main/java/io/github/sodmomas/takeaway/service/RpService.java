@@ -10,7 +10,7 @@ import io.github.sodmomas.takeaway.common.enums.RpStatusEnum;
 import io.github.sodmomas.takeaway.config.TakeawayFilter;
 import io.github.sodmomas.takeaway.mapper.RpMapper;
 import io.github.sodmomas.takeaway.model.PharmacyAddRpRequest;
-import io.github.sodmomas.takeaway.model.PharmacyRpList;
+import io.github.sodmomas.takeaway.model.PharmacyRpDetail;
 import io.github.sodmomas.takeaway.model.PharmacyRpListRequest;
 import io.github.sodmomas.takeaway.model.entity.Rp;
 import io.github.sodmomas.takeaway.model.entity.RpItem;
@@ -63,7 +63,7 @@ public class RpService extends ServiceImpl<RpMapper, Rp> {
         return rp.getId();
     }
 
-    public Page<PharmacyRpList> pharmacyRpListPage(PharmacyRpListRequest request) {
+    public Page<PharmacyRpDetail> pharmacyRpListPage(PharmacyRpListRequest request) {
         final Integer accountId = TakeawayFilter.LOGIN_USER.get().getAccountId();
         Wrapper<Rp> wrapper = Wrappers.<Rp>lambdaQuery().eq(Rp::getPharmacyId, accountId);
         final Page<Rp> rpPage = super.page(Page.of(request.getPage(), request.getSize()), wrapper);
@@ -76,18 +76,38 @@ public class RpService extends ServiceImpl<RpMapper, Rp> {
         final Set<Integer> rpIds = rpList.stream().map(Rp::getId).collect(Collectors.toSet());
         final List<RpItem> rpItemList = rpItemService.list(Wrappers.<RpItem>lambdaQuery().in(RpItem::getRpId, rpIds));
         // 按处方id分组
-        final Map<Integer, List<PharmacyRpList.Item>> rpItemMap = rpItemList.stream().map(e -> BeanUtil.copyProperties(e, PharmacyRpList.Item.class)).collect(Collectors.groupingBy(PharmacyRpList.Item::getRpId));
+        final Map<Integer, List<PharmacyRpDetail.Item>> rpItemMap = rpItemList.stream()
+                .map(e -> BeanUtil.copyProperties(e, PharmacyRpDetail.Item.class))
+                .collect(Collectors.groupingBy(PharmacyRpDetail.Item::getRpId));
 
-        final List<PharmacyRpList> outs = new ArrayList<>(rpList.size());
+        final List<PharmacyRpDetail> outs = new ArrayList<>(rpList.size());
         for (Rp rp : rpList) {
-            final PharmacyRpList out = BeanUtil.copyProperties(rp, PharmacyRpList.class);
+            final PharmacyRpDetail out = BeanUtil.copyProperties(rp, PharmacyRpDetail.class);
             // 按处方id获取明细列表
             out.setItemList(rpItemMap.get(out.getId()));
             outs.add(out);
         }
 
-        final Page<PharmacyRpList> ret = Page.of(request.getPage(), request.getSize());
+        final Page<PharmacyRpDetail> ret = Page.of(request.getPage(), request.getSize());
         ret.setRecords(outs);
         return ret;
+    }
+
+    public PharmacyRpDetail pharmacyRpDetail(Integer id) {
+        // 根据id查找处方
+        Wrapper<Rp> wrapper = Wrappers.<Rp>lambdaQuery()
+                .eq(Rp::getId, id)
+                .last("LIMIT 1");
+        final Rp one = super.getOne(wrapper);
+        // 没查到
+        if (one == null) return null;
+        // 查找处方明细
+        final List<PharmacyRpDetail.Item> list = rpItemService.list(Wrappers.<RpItem>lambdaQuery().in(RpItem::getRpId, one.getId())).stream()
+                .map(e -> BeanUtil.copyProperties(e, PharmacyRpDetail.Item.class))
+                .toList();
+        // 转换为出参格式
+        final PharmacyRpDetail out = BeanUtil.copyProperties(one, PharmacyRpDetail.class);
+        out.setItemList(list);
+        return out;
     }
 }
