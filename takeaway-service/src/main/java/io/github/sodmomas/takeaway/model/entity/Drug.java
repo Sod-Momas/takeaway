@@ -14,10 +14,10 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("drug")
-@KeySequence(dbType = DbType.POSTGRE_SQL, value = "drug_id_sequence")
+@TableName("t_drug")
+@KeySequence(dbType = DbType.POSTGRE_SQL, value = "takeaway_seq")
 public class Drug extends Model<Drug> {
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.INPUT)
     private Integer id;
     /**
      * 批准文号

@@ -7,15 +7,17 @@ import lombok.EqualsAndHashCode;
 
 /**
  * @author Sod-Momas
- * @since 2023/10/21
+ * @since 2023/11/5
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("t_rel_account_role")
+@TableName("t_rp_item")
 @KeySequence(dbType = DbType.POSTGRE_SQL, value = "takeaway_seq")
-public class RelAccountRole extends BaseEntity {
+public class RpItem extends BaseEntity {
     @TableId(type = IdType.INPUT)
     private Integer id;
-    private Integer accountId;
-    private Integer roleId;
+    private Integer rpId;
+    private String drugName;
+    private String drugType;
+    private Integer drugCount;
 }

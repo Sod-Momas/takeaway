@@ -132,4 +132,27 @@ COMMENT ON COLUMN public.t_rp.recheck_pharmacist_id IS '复核药师用户id';
 COMMENT ON COLUMN public.t_rp.status IS '审核状态';
 COMMENT ON COLUMN public.t_rp.reject_reason IS '驳回原因';
 COMMENT ON COLUMN public.t_rp.doctor_advice IS '医嘱';
+COMMENT ON COLUMN public.t_rp.create_time IS '创建时间';
+COMMENT ON COLUMN public.t_rp.update_time IS '更新时间';
 
+-- Table: public.t_rp_item
+-- DROP TABLE IF EXISTS public.t_rp_item;
+CREATE TABLE IF NOT EXISTS public.t_rp_item
+(
+    id integer NOT NULL,
+    rp_id integer,
+    drug_name character varying(255) COLLATE pg_catalog."default",
+    drug_type character varying(255) COLLATE pg_catalog."default",
+    drug_count integer,
+    create_time timestamp without time zone,
+    update_time timestamp without time zone,
+    CONSTRAINT t_rp_item_pkey PRIMARY KEY (id)
+) TABLESPACE pg_default;
+ALTER TABLE IF EXISTS public.t_rp_item OWNER to takeaway;
+COMMENT ON TABLE public.t_rp_item IS '处方明细表';
+COMMENT ON COLUMN public.t_rp_item.rp_id IS '处方id';
+COMMENT ON COLUMN public.t_rp_item.drug_name IS '药品名称';
+COMMENT ON COLUMN public.t_rp_item.drug_type IS '药品类型';
+COMMENT ON COLUMN public.t_rp_item.drug_count IS '药品数量';
+COMMENT ON COLUMN public.t_rp_item.create_time IS '创建时间';
+COMMENT ON COLUMN public.t_rp_item.update_time IS '更新时间';
