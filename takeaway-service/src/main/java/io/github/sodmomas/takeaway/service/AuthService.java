@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -62,7 +63,11 @@ public class AuthService {
     }
 
     public void logout(String accessToken) {
-        redisTemplate.delete(RedisKeyConstants.ACCESS_TOKEN_PREFIX + ":" + accessToken);
-        redisTemplate.delete(RedisKeyConstants.REFRESH_TOKEN_PREFIX + ":" + accessToken);
+        Optional.ofNullable(accessToken)
+                .map(e -> e.replaceFirst("Bearer ", ""))
+                .ifPresent(e -> {
+                    redisTemplate.delete(RedisKeyConstants.ACCESS_TOKEN_PREFIX + ":" + e);
+                    redisTemplate.delete(RedisKeyConstants.REFRESH_TOKEN_PREFIX + ":" + e);
+                });
     }
 }
