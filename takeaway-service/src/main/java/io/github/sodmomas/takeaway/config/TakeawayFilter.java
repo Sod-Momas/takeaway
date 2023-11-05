@@ -30,7 +30,7 @@ import java.util.Set;
  */
 @Component
 public class TakeawayFilter extends OncePerRequestFilter {
-    private static final ThreadLocal<UserAuthInfo> LOGIN_USER = new ThreadLocal<>();
+    public static final ThreadLocal<UserAuthInfo> LOGIN_USER = new ThreadLocal<>();
     private static final Set<String> NO_LOGIN_URL_SET = new HashSet<>(Arrays.asList(
             // 登录接口 @see io.github.sodmomas.takeaway.controller.AuthController.login
             "/auth/login",

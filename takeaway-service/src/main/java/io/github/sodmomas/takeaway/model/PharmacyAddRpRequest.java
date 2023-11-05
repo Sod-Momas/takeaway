@@ -15,9 +15,9 @@ import java.util.List;
  */
 @Schema(description = "添加处方请求")
 @Data
-public class AddRpRequest {
-    @Schema(description = "药店id")
-    private Integer pharmacyId;
+public class PharmacyAddRpRequest {
+//    @Schema(description = "药店id")
+//    private Integer pharmacyId;
     @NotNull(message = "患者id为空")
     @Schema(description = "患者id")
     private Integer patientId;

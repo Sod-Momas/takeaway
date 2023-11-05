@@ -1,6 +1,9 @@
 package io.github.sodmomas.takeaway.controller;
 
-import io.github.sodmomas.takeaway.model.AddRpRequest;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.github.sodmomas.takeaway.model.PharmacyAddRpRequest;
+import io.github.sodmomas.takeaway.model.PharmacyRpList;
+import io.github.sodmomas.takeaway.model.PharmacyRpListRequest;
 import io.github.sodmomas.takeaway.service.RpService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,12 @@ public class RpController {
 
     @PostMapping("/add")
     @Operation(description = "添加处方")
-    Integer addRp(@RequestBody AddRpRequest request) {
-        return rpService.addRp(request);
+    Integer addRp(@RequestBody PharmacyAddRpRequest request) {
+        return rpService.pharmacyAddRp(request);
+    }
+
+    @PostMapping("/page")
+    Page<PharmacyRpList> pharmacyRpListPage(@RequestBody PharmacyRpListRequest request) {
+        return rpService.pharmacyRpListPage(request);
     }
 }
