@@ -4,14 +4,13 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.sodmomas.takeaway.common.enums.RpStatusEnum;
 import io.github.sodmomas.takeaway.config.TakeawayFilter;
 import io.github.sodmomas.takeaway.mapper.RpMapper;
-import io.github.sodmomas.takeaway.model.PharmacyAddRpRequest;
-import io.github.sodmomas.takeaway.model.PharmacyRpDetail;
-import io.github.sodmomas.takeaway.model.PharmacyRpListRequest;
+import io.github.sodmomas.takeaway.model.*;
 import io.github.sodmomas.takeaway.model.entity.Rp;
 import io.github.sodmomas.takeaway.model.entity.RpItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,5 +108,64 @@ public class RpService extends ServiceImpl<RpMapper, Rp> {
         final PharmacyRpDetail out = BeanUtil.copyProperties(one, PharmacyRpDetail.class);
         out.setItemList(list);
         return out;
+    }
+
+    public Page<DoctorRpDetail> doctorRpListPage(DoctorRpListRequest request) {
+        final Integer accountId = TakeawayFilter.LOGIN_USER.get().getAccountId();
+        Wrapper<Rp> wrapper = Wrappers.<Rp>lambdaQuery().eq(Rp::getPharmacyId, accountId);
+        final Page<Rp> rpPage = super.page(Page.of(request.getPage(), request.getSize()), wrapper);
+        final List<Rp> rpList = rpPage.getRecords();
+        if (rpList.isEmpty()) {
+            // 没数据
+            return Page.of(request.getPage(), request.getSize());
+        }
+        // 使用处方id查找处方明细
+        final Set<Integer> rpIds = rpList.stream().map(Rp::getId).collect(Collectors.toSet());
+        final List<RpItem> rpItemList = rpItemService.list(Wrappers.<RpItem>lambdaQuery().in(RpItem::getRpId, rpIds));
+        // 按处方id分组
+        final Map<Integer, List<DoctorRpDetail.Item>> rpItemMap = rpItemList.stream()
+                .map(e -> BeanUtil.copyProperties(e, DoctorRpDetail.Item.class))
+                .collect(Collectors.groupingBy(DoctorRpDetail.Item::getRpId));
+
+        final List<DoctorRpDetail> outs = new ArrayList<>(rpList.size());
+        for (Rp rp : rpList) {
+            final DoctorRpDetail out = BeanUtil.copyProperties(rp, DoctorRpDetail.class);
+            // 按处方id获取明细列表
+            out.setItemList(rpItemMap.get(out.getId()));
+            outs.add(out);
+        }
+
+        final Page<DoctorRpDetail> ret = Page.of(request.getPage(), request.getSize());
+        ret.setRecords(outs);
+        return ret;
+    }
+
+    public DoctorRpDetail doctorRpDetail(Integer id) {
+        // 根据id查找处方
+        Wrapper<Rp> wrapper = Wrappers.<Rp>lambdaQuery()
+                .eq(Rp::getId, id)
+                .last("LIMIT 1");
+        final Rp one = super.getOne(wrapper);
+        // 没查到
+        if (one == null) return null;
+        // 查找处方明细
+        final List<DoctorRpDetail.Item> list = rpItemService.list(Wrappers.<RpItem>lambdaQuery().in(RpItem::getRpId, one.getId())).stream()
+                .map(e -> BeanUtil.copyProperties(e, DoctorRpDetail.Item.class))
+                .toList();
+        // 转换为出参格式
+        final DoctorRpDetail out = BeanUtil.copyProperties(one, DoctorRpDetail.class);
+        out.setItemList(list);
+        return out;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void auth(Integer id, RpStatusEnum rpStatusEnum, String rejectReason, SFunction<Rp, Integer> sFunction) {
+// 获取登录人账号id
+        final Integer accountId = TakeawayFilter.LOGIN_USER.get().getAccountId();
+        super.update(Wrappers.<Rp>lambdaUpdate()
+                .eq(Rp::getId, id)
+                .set(Rp::getStatus, rpStatusEnum.getCode())
+                .set(Rp::getRejectReason, rejectReason)
+                .set(sFunction, accountId));
     }
 }
