@@ -1,15 +1,10 @@
 # takeaway
-外卖系统
-
-## todo
-- [x] 药品管理
-- [x] 用户管理
-- [x] 登录退出
-- [ ] 处方管理
-- [ ] 订单管理
-- [ ] 账户余额
+药品订单管理系统
 
 # Getting Started
+
+系统分为doctor医生端，ops运营端， pharmacy药店端， patient患者端，可以同时启动在不同端口，然后使用域名访问区分，
+比较方便的方案是修改 [hosts](docs/hosts) 和使用nginx反向代理来达到目的，请参照[Nginx配置](docs/nginx-takeaway.conf)
 
 ### Reference Documentation
 For further reference, please consider the following sections:
